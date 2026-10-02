@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Log in | PromoConnect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="mark" href="index.html">PromoConnect</a>
+  <a class="top-link" href="signup.html">Join free</a>
+</header>
+
+<main class="wrap">
+  <div id="message" class="msg" role="alert" aria-live="polite" hidden></div>
+
+  <!-- Log in -->
+  <section id="view-login">
+    <h1>Log in</h1>
+    <p class="lede">Welcome back. Log in to see your PromoConnect details.</p>
+    <form id="login" class="card" novalidate>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" autocomplete="current-password" required>
+      </div>
+      <button class="btn" type="submit" id="login-btn">Log in</button>
+      <p class="fine">
+        <button class="linklike" type="button" id="forgot">Forgot your password?</button>
+        &nbsp;·&nbsp; <a href="signup.html">Create an account</a>
+      </p>
+    </form>
+  </section>
+
+  <!-- Signed in -->
+  <section id="view-account" hidden>
+    <h1 id="hello">Your account</h1>
+    <p class="lede" id="status-line"></p>
+    <div class="card">
+      <dl class="details" id="details"></dl>
+      <button class="btn ghost" type="button" id="logout">Log out</button>
+    </div>
+  </section>
+
+  <!-- Set a new password (after the reset email link) -->
+  <section id="view-recovery" hidden>
+    <h1>Set a new password</h1>
+    <form id="recovery" class="card" novalidate>
+      <div class="field">
+        <label for="new-password">New password <span class="hint">At least 8 characters</span></label>
+        <input type="password" id="new-password" autocomplete="new-password" minlength="8" maxlength="72" required>
+      </div>
+      <button class="btn" type="submit">Save new password</button>
+    </form>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
+<script>
+(function () {
+  var cfg = window.PC_CONFIG || {};
+  var connected = cfg.SUPABASE_URL && cfg.SUPABASE_ANON_KEY &&
+                  cfg.SUPABASE_URL.indexOf("PASTE") === -1 && cfg.SUPABASE_ANON_KEY.indexOf("PASTE") === -1;
+  var sb = connected && window.supabase ? window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY) : null;
+
+  var message = document.getElementById("message");
+  var views = {
+    login: document.getElementById("view-login"),
+    account: document.getElementById("view-account"),
+    recovery: document.getElementById("view-recovery")
+  };
+
+  function show(text, kind) {
+    message.textContent = text;
+    message.className = "msg " + kind;
+    message.hidden = false;
+  }
+  function clear() { message.hidden = true; }
+  function showView(name) {
+    Object.keys(views).forEach(function (key) { views[key].hidden = key !== name; });
+  }
+
+  if (!sb) {
+    show("Login isn't connected yet. Please try again soon or message us on Instagram @promoconnect.in.", "error");
+    return;
+  }
+
+  var LABELS = [
+    ["role", "Account type"],
+    ["email", "Email"],
+    ["whatsapp", "WhatsApp"],
+    ["city", "City"],
+    ["instagram", "Instagram"],
+    ["niche", "Niche"],
+    ["followers", "Followers"],
+    ["language", "Language"],
+    ["brand_name", "Brand"],
+    ["website", "Website or Instagram"],
+    ["category", "Category"],
+    ["product", "Product"],
+    ["country", "Based in"]
+  ];
+
+  function renderAccount(user) {
+    sb.from("profiles").select("*").eq("id", user.id).maybeSingle().then(function (res) {
+      var p = res.data;
+      showView("account");
+      var list = document.getElementById("details");
+      list.textContent = "";
+
+      if (!p) {
+        document.getElementById("hello").textContent = "Your account";
+        document.getElementById("status-line").textContent = "We couldn't find your profile yet. Message us on Instagram @promoconnect.in.";
+        return;
+      }
+
+      document.getElementById("hello").textContent = "Hi, " + (p.full_name || "there");
+      document.getElementById("status-line").textContent =
+        "We're matching " + (p.role === "brand" ? "creators to your product" : "you with brands") +
+        " by hand. We'll message you on WhatsApp when there's a match.";
+
+      LABELS.forEach(function (pair) {
+        var value = p[pair[0]];
+        if (value === null || value === undefined || value === "") return;
+        if (pair[0] === "instagram") value = "@" + value;
+        if (pair[0] === "role") value = value === "brand" ? "Brand" : "Creator";
+        var row = document.createElement("div");
+        var dt = document.createElement("dt");
+        var dd = document.createElement("dd");
+        dt.textContent = pair[1];
+        dd.textContent = String(value);
+        row.appendChild(dt);
+        row.appendChild(dd);
+        list.appendChild(row);
+      });
+    });
+  }
+
+  sb.auth.onAuthStateChange(function (event, session) {
+    if (event === "PASSWORD_RECOVERY") {
+      showView("recovery");
+    } else if (event === "SIGNED_OUT") {
+      showView("login");
+    }
+  });
+
+  sb.auth.getSession().then(function (res) {
+    var session = res.data && res.data.session;
+    if (session && views.recovery.hidden) renderAccount(session.user);
+  });
+
+  document.getElementById("login").addEventListener("submit", function (e) {
+    e.preventDefault();
+    clear();
+    var email = document.getElementById("email").value.trim();
+    var password = document.getElementById("password").value;
+    if (!email || !password) {
+      show("Enter your email and password.", "error");
+      return;
+    }
+    var btn = document.getElementById("login-btn");
+    btn.disabled = true;
+    btn.textContent = "Logging in...";
+
+    sb.auth.signInWithPassword({ email: email, password: password }).then(function (res) {
+      btn.disabled = false;
+      btn.textContent = "Log in";
+      if (res.error) {
+        var text = res.error.message || "";
+        if (/confirm/i.test(text)) {
+          show("Confirm your email first. Check your inbox for our message.", "error");
+        } else {
+          show("Email or password is wrong. Try again or reset your password.", "error");
+        }
+        return;
+      }
+      document.getElementById("password").value = "";
+      renderAccount(res.data.user);
+    }).catch(function () {
+      btn.disabled = false;
+      btn.textContent = "Log in";
+      show("Something went wrong with your connection. Try again.", "error");
+    });
+  });
+
+  document.getElementById("forgot").addEventListener("click", function () {
+    clear();
+    var email = document.getElementById("email").value.trim();
+    if (!email) {
+      show("Type your email above, then tap \"Forgot your password?\" again.", "error");
+      return;
+    }
+    sb.auth.resetPasswordForEmail(email, { redirectTo: location.origin + location.pathname }).then(function (res) {
+      if (res.error) {
+        show("We couldn't send the reset email. Wait a few minutes and try again.", "error");
+      } else {
+        show("If that email has an account, we've sent a reset link.", "ok");
+      }
+    });
+  });
+
+  document.getElementById("recovery").addEventListener("submit", function (e) {
+    e.preventDefault();
+    clear();
+    var value = document.getElementById("new-password").value;
+    if (value.length < 8) {
+      show("Choose a password with at least 8 characters.", "error");
+      return;
+    }
+    sb.auth.updateUser({ password: value }).then(function (res) {
+      if (res.error) {
+        show("We couldn't save your new password. Open the reset link again and retry.", "error");
+        return;
+      }
+      show("Password updated.", "ok");
+      sb.auth.getUser().then(function (u) { if (u.data && u.data.user) renderAccount(u.data.user); });
+    });
+  });
+
+  document.getElementById("logout").addEventListener("click", function () {
+    clear();
+    sb.auth.signOut().then(function () {
+      showView("login");
+      show("You're logged out.", "ok");
+    });
+  });
+})();
+</script>
+</body>
+</html>
