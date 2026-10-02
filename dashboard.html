@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My dashboard | PromoConnect</title>
+<meta name="description" content="PromoConnect creator dashboard: your status, points, rank, products received and badges.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: warm paper page, one idea per band, rounded cards; PromoConnect blue is the only accent, yellow marks creators */
+:root{--bg:#f6f3ee;--bg2:#ece7df;--ink:#121212;--muted:#5f5b55;--line:rgba(18,18,18,.12);--card:#fffdf9;--field:#ffffff;--acc:#1F55F0;--acc-ink:#fff;--soft:rgba(31,85,240,.10);--sun:#F5B638;--sun-soft:rgba(245,182,56,.18);--good:#1a7a50;--good-soft:rgba(26,122,80,.12);--warn:#9a6400;--warn-soft:rgba(245,182,56,.2);--err:#C2362B;--shadow:0 30px 60px -28px rgba(20,25,60,.28);
+  --display:Geist,system-ui,-apple-system,"Segoe UI",sans-serif;--serif:"Instrument Serif",Georgia,serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0c0c0d;--bg2:#141416;--ink:#f3efe8;--muted:#a19c94;--line:rgba(243,239,232,.14);--card:#18181b;--field:#111113;--acc:#5C84FF;--acc-ink:#0a0f24;--soft:rgba(92,132,255,.16);--sun-soft:rgba(245,182,56,.16);--good:#4cc38a;--good-soft:rgba(76,195,138,.14);--warn:#F5B638;--warn-soft:rgba(245,182,56,.14);--err:#FF7A6E;--shadow:0 30px 60px -28px rgba(0,0,0,.7)}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0c0c0d;--bg2:#141416;--ink:#f3efe8;--muted:#a19c94;--line:rgba(243,239,232,.14);--card:#18181b;--field:#111113;--acc:#5C84FF;--acc-ink:#0a0f24;--soft:rgba(92,132,255,.16);--sun-soft:rgba(245,182,56,.16);--good:#4cc38a;--good-soft:rgba(76,195,138,.14);--warn:#F5B638;--warn-soft:rgba(245,182,56,.14);--err:#FF7A6E;--shadow:0 30px 60px -28px rgba(0,0,0,.7)}
+*,*::before,*::after{box-sizing:border-box}
+html,body{max-width:100%;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 var(--display);-webkit-font-smoothing:antialiased;touch-action:pan-y pinch-zoom;overscroll-behavior-x:none}
+a{color:var(--acc)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+[hidden]{display:none!important}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-weight:600;letter-spacing:-.035em;line-height:1.05;margin:0;text-wrap:balance}
+.serif{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-.01em;color:var(--acc)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 8px;background:var(--card)}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px var(--soft)}
+.hero{padding-block:clamp(44px,7vw,84px) clamp(28px,4vw,44px)}
+.hero h1{font-size:clamp(40px,6.6vw,80px);margin-top:18px;max-width:16ch}
+.hero p.lead{color:var(--muted);font-size:clamp(17px,1.7vw,20px);max-width:52ch;margin:18px 0 0}
+.band{padding-block:clamp(36px,6vw,72px)}
+.band h2{font-size:clamp(28px,4vw,46px)}
+.band .sub{color:var(--muted);max-width:56ch;margin:12px 0 0}
+.btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;padding:14px 22px;font-weight:600;font-size:16px;text-decoration:none;cursor:pointer}
+.btn.acc{background:var(--acc);color:var(--acc-ink);box-shadow:0 12px 30px -12px var(--acc)}
+.btn.dark{background:var(--ink);color:var(--bg)}
+.btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn[disabled]{opacity:.6;cursor:progress}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:clamp(20px,3vw,28px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.grid>*{min-width:0}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 11px;border-radius:999px;background:var(--soft);color:var(--ink);white-space:nowrap}
+.note{font-size:13px;color:var(--muted)}
+.final{background:var(--ink);color:var(--bg);border-radius:clamp(26px,4vw,40px);padding:clamp(36px,6vw,72px) clamp(22px,5vw,64px);margin-block:clamp(36px,6vw,72px)}
+.final h2{font-size:clamp(32px,5vw,60px);max-width:14ch}
+.final .serif{color:#8FAEFF}
+.final p{color:color-mix(in srgb,var(--bg) 70%,transparent);max-width:44ch;margin:14px 0 0}
+.final .btn.line{color:var(--bg);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--bg) 30%,transparent)}
+footer{border-top:1px solid var(--line);padding:28px 0 44px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 18px}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--ink)}
+/* one gentle entrance when the page opens; nothing keeps moving */
+.rise{animation:rise .7s cubic-bezier(.2,.8,.2,1) both}
+.rise.d1{animation-delay:.08s}.rise.d2{animation-delay:.16s}.rise.d3{animation-delay:.24s}.rise.d4{animation-delay:.32s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.rise{animation:none}html{scroll-behavior:auto}}
+/* explainer video in a phone frame */
+.vphone{width:min(100%,300px);aspect-ratio:9/16;border-radius:38px;background:#0d0d0f;padding:9px;box-shadow:var(--shadow),inset 0 0 0 2px #2a2a2e;margin-inline:auto}
+.vphone video{display:block;width:100%;height:100%;border-radius:30px;object-fit:cover;background:#0b0d1c}
+
+/* shared menu */
+.pn{position:sticky;top:0;z-index:40;padding-top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line)}
+.pn-in{max-width:1200px;margin:0 auto;padding:0 20px;height:64px;display:flex;align-items:center;gap:10px}
+.pn-logo{display:flex;align-items:center;gap:9px;margin-right:auto;font-weight:700;font-size:19px;letter-spacing:-.04em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.pn-logo img{width:30px;height:30px;border-radius:9px}
+.pn-links{display:flex;gap:2px}
+.pn-links a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:500;padding:8px 12px;border-radius:999px;white-space:nowrap}
+.pn-links a:hover{color:var(--ink)}
+.pn-links a[aria-current]{color:var(--ink);background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.pn-dash,.pn-join{font-size:14px;font-weight:600;text-decoration:none;border-radius:999px;padding:10px 16px;white-space:nowrap}
+.pn-dash{color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.pn-join{background:var(--ink);color:var(--bg)}
+.pn-menu{display:none;width:42px;height:42px;border-radius:50%;border:0;box-shadow:inset 0 0 0 1.5px var(--line);background:transparent;color:var(--ink);cursor:pointer;place-items:center;padding:0}
+.pn-menu span{display:block;width:16px;height:2px;border-radius:2px;background:currentColor;margin:2.5px auto;transition:transform .25s}
+.pn-menu[aria-expanded="true"] span:first-child{transform:translateY(3.5px) rotate(45deg)}
+.pn-menu[aria-expanded="true"] span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+.pn-panel{max-width:1200px;margin:0 auto;padding:6px 20px 18px;display:grid}
+.pn-panel[hidden]{display:none}
+.pn-panel a{padding:14px 4px;font-size:17px;font-weight:500;color:var(--ink);text-decoration:none;border-top:1px solid var(--line);display:flex;justify-content:space-between}
+.pn-panel a::after{content:"›";color:var(--muted)}
+@media (max-width:1060px){.pn-links,.pn-dash{display:none}.pn-menu{display:grid}}
+@media (min-width:1061px){.pn-panel{display:none!important}}
+
+.gate{max-width:520px;margin:clamp(28px,6vw,64px) auto}
+.gate h1{font-size:clamp(34px,5vw,52px)}
+.gate p.lead{color:var(--muted);margin:12px 0 22px}
+.f{display:grid;gap:7px;margin-bottom:14px}
+.f label{font-size:14px;font-weight:600}
+.f input{background:var(--field);border:1.5px solid var(--line);border-radius:14px;padding:14px;width:100%;font-size:17px}
+.f input:focus{border-color:var(--acc);outline:none;box-shadow:0 0 0 4px var(--soft)}
+#code{letter-spacing:.4em;font-variant-numeric:tabular-nums;text-align:center;font-size:24px;font-weight:600}
+.msg{font-size:14px;min-height:20px;margin:10px 0 0}
+.msg.err{color:var(--err)}.msg.ok{color:var(--good)}
+.linkbtn{background:none;border:0;padding:0;color:var(--acc);text-decoration:underline;cursor:pointer;font-size:15px}
+.gate .alt{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:15px;color:var(--muted)}
+.dash{padding-block:clamp(28px,5vw,56px)}
+.sample{border-radius:18px;padding:12px 16px;background:var(--warn-soft);font-size:15px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:center}
+.dh{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.dh .who{display:flex;gap:16px;align-items:center;min-width:0}
+.dh .av{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;font-size:26px;font-weight:700;color:#fff;background:#B4537A;flex:none}
+.dh h1{font-size:clamp(28px,4.4vw,44px)}
+.dh .m{color:var(--muted);font-size:15px;overflow-wrap:anywhere}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;border-radius:999px;padding:6px 12px;margin-top:8px}
+.status.verified{background:var(--good-soft);color:var(--good)}
+.status.pending{background:var(--warn-soft);color:var(--warn)}
+.status.paused{background:var(--bg2);color:var(--muted)}
+.tiles{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));margin-top:24px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;min-width:0}
+.tile .k{font-size:13px;color:var(--muted);font-weight:500}
+.tile .v{font-size:clamp(34px,4.4vw,46px);font-weight:600;letter-spacing:-.04em;line-height:1.1;margin-top:6px;font-variant-numeric:tabular-nums}
+.tile .s{font-size:13px;color:var(--muted);margin-top:4px}
+.tile.hero-tile{background:var(--ink);color:var(--bg);border-color:transparent}
+.tile.hero-tile .k,.tile.hero-tile .s{color:color-mix(in srgb,var(--bg) 65%,transparent)}
+.two{display:grid;gap:14px;grid-template-columns:1fr;margin-top:14px}
+@media (min-width:900px){.two{grid-template-columns:1.25fr 1fr}}
+.two>*{min-width:0}
+.card h2{font-size:21px;letter-spacing:-.02em}
+.meter{height:10px;border-radius:99px;background:var(--bg2);overflow:hidden;margin:14px 0 8px}
+.meter i{display:block;height:100%;border-radius:99px;background:var(--acc);width:0;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.badges{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));margin-top:16px}
+.badge{display:flex;gap:12px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:12px;min-width:0}
+.badge i{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;flex:none;background:var(--soft);color:var(--acc)}
+.badge b{display:block;font-size:15px}.badge span{font-size:13px;color:var(--muted)}
+.badge.locked{opacity:.55}
+.badge.locked i{background:var(--bg2);color:var(--muted)}
+.badge .st{margin-left:auto;font-size:12px;font-weight:600;color:var(--good);white-space:nowrap}
+.badge.locked .st{color:var(--muted)}
+.next{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:10px}
+.next li{display:flex;gap:10px;align-items:flex-start;font-size:15px}
+.next li i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none;font-style:normal;font-size:12px;font-weight:700;background:var(--soft);color:var(--acc)}
+.teamnote{margin-top:14px;border-left:3px solid var(--sun);padding:8px 14px;background:var(--sun-soft);border-radius:8px;font-size:15px}
+.toggle{display:flex;gap:14px;align-items:center;justify-content:space-between;margin-top:14px}
+.toggle p{margin:0;font-size:15px;color:var(--muted)}
+.sw{position:relative;width:54px;height:32px;border-radius:99px;border:0;background:var(--bg2);box-shadow:inset 0 0 0 1.5px var(--line);cursor:pointer;flex:none;transition:background .25s}
+.sw::after{content:"";position:absolute;top:4px;left:4px;width:24px;height:24px;border-radius:50%;background:var(--card);box-shadow:0 2px 6px rgba(0,0,0,.25);transition:transform .25s}
+.sw[aria-checked="true"]{background:var(--acc);box-shadow:none}
+.sw[aria-checked="true"]::after{transform:translateX(22px)}
+.sw[disabled]{opacity:.6}
+</style>
+</head>
+<body>
+<header class="pn" id="nav"><div class="pn-in">
+  <a class="pn-logo" href="index.html"><img src="logo.png" alt="">PromoConnect</a>
+  <nav class="pn-links" aria-label="Main"><a href="index.html#how">How it works</a><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="pricing.html">Pricing</a><a href="help.html">Help</a><a href="https://instagram.com/promoconnect.in">Instagram</a></nav>
+  <a class="pn-dash" href="dashboard.html" aria-current="page">My dashboard</a>
+  <a class="pn-join" href="join.html">Join free</a>
+  <button class="pn-menu" type="button" aria-expanded="false" aria-controls="pnPanel" aria-label="Menu"><span></span><span></span></button>
+</div><nav class="pn-panel" id="pnPanel" aria-label="Menu" hidden><a href="index.html#how">How it works</a><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="pricing.html">Pricing</a><a href="help.html">Help</a><a href="https://instagram.com/promoconnect.in">Instagram</a><a href="dashboard.html">My dashboard</a><a href="contact.html">Contact</a></nav></header>
+<main>
+
+<div class="wrap">
+  <section class="gate card rise" id="gate">
+    <span class="eyebrow"><i></i>Creator dashboard</span>
+    <h1 style="margin-top:16px">My <span class="serif">dashboard.</span></h1>
+    <p class="lead" id="gateLead">See your status, points, rank and badges. Sign in with the email you joined with. There is no password.</p>
+    <form id="emailForm" novalidate>
+      <div class="f"><label for="email">Your email</label><input id="email" type="email" autocomplete="email" inputmode="email" placeholder="name@gmail.com" required></div>
+      <button class="btn acc" type="submit" id="sendBtn">Email me a sign-in code →</button>
+    </form>
+    <form id="codeForm" novalidate hidden>
+      <div class="f"><label for="code">6-digit code from your email</label><input id="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="7" placeholder="000000" required></div>
+      <button class="btn acc" type="submit" id="codeBtn">Open my dashboard →</button>
+      <p style="margin:14px 0 0"><button class="linkbtn" type="button" id="back">Use a different email</button></p>
+    </form>
+    <p class="msg" id="msg" role="status"></p>
+    <div class="alt"><button class="linkbtn" type="button" id="sampleBtn">See a sample dashboard</button><span>Not a creator yet? <a href="join.html#creator">Join free</a></span></div>
+  </section>
+
+  <section class="dash" id="dash" hidden>
+    <div class="sample" id="sampleBar" hidden><span><b>Sample dashboard.</b> This is example data that shows what a creator sees.</span><button class="linkbtn" type="button" id="sampleExit">Sign in to mine</button></div>
+    <div class="dh">
+      <div class="who"><div class="av" id="dAv"></div><div><h1 id="dName"></h1><div class="m" id="dMeta"></div><span class="status" id="dStatus"></span></div></div>
+      <button class="btn line" type="button" id="signOut">Sign out</button>
+    </div>
+    <div class="tiles">
+      <div class="tile hero-tile"><div class="k">Points</div><div class="v" id="tPoints">0</div><div class="s">100 per collab, 50 per on-time post</div></div>
+      <div class="tile"><div class="k">Your rank</div><div class="v" id="tRank">–</div><div class="s" id="tRankS"></div></div>
+      <div class="tile"><div class="k">Collabs completed</div><div class="v" id="tCollabs">0</div><div class="s" id="tOntime"></div></div>
+      <div class="tile"><div class="k">Products received</div><div class="v" id="tProducts">0</div><div class="s" id="tValue"></div></div>
+    </div>
+    <div class="two">
+      <div class="card">
+        <h2>Achievements</h2>
+        <div id="nextBadge"></div>
+        <div class="badges" id="dBadges"></div>
+      </div>
+      <div style="display:grid;gap:14px;align-content:start">
+        <div class="card"><h2>What happens next</h2><ul class="next" id="dNext"></ul><div class="teamnote" id="dNote" hidden></div></div>
+        <div class="card"><h2>Top 10</h2>
+          <div class="toggle"><p id="boardText">Show my Instagram handle and achievements on the public Top 10.</p><button class="sw" type="button" role="switch" aria-checked="false" id="boardSw" aria-label="Show me on the Top 10"></button></div>
+          <p class="msg" id="boardMsg" role="status"></p>
+          <p style="margin:6px 0 0"><a href="leaderboard.html">See the Top 10</a> · <a href="help.html#dashboard">How points work</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</main>
+<footer><div class="wrap">
+  <span>© 2026 PromoConnect · Made in India · promoconnect.in@gmail.com · <a href="https://instagram.com/promoconnect.in" target="_blank" rel="noopener">Instagram @promoconnect.in</a></span>
+  <nav><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="dashboard.html">My dashboard</a><a href="help.html">Help</a><a href="pricing.html">Pricing</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="refund.html">Refunds</a><a href="contact.html">Contact</a></nav>
+</div></footer>
+<script>(function(){var b=document.querySelector('.pn-menu'),p=document.getElementById('pnPanel');if(!b||!p)return;
+b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));p.hidden=o;});
+p.addEventListener('click',function(e){if(e.target.closest('a')){b.setAttribute('aria-expanded','false');p.hidden=true;}});})();</script>
+<script>
+(function(){
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyYXvMHUr0huQLzTiupv0fo-H-aEklPTzNxd1v0Oq5pc_h9wiHvZJzfoxpsz7Gy4agq/exec';
+
+var BADGES = {
+  verified: { name: 'Verified', how: 'Profile checked by PromoConnect', icon: '<path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>' },
+  founding: { name: 'Founding creator', how: 'One of the first 100 creators to join', icon: '<path d="M5 21V4M5 4h12l-2 4 2 4H5"/>' },
+  first:    { name: 'First collab', how: 'Completed 1 collaboration', icon: '<path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/>' },
+  five:     { name: 'Rising creator', how: 'Completed 5 collaborations', icon: '<path d="M4 20V11M10 20V4M16 20v-7M22 20H2"/>' },
+  ten:      { name: 'Pro creator', how: 'Completed 10 collaborations', icon: '<path d="M4 18h16l1-10-5 4-4-7-4 7-5-4z"/>' },
+  ontime:   { name: 'Always on time', how: '3 or more collabs, every post on time', icon: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>' }
+};
+function svg(d, s){ return '<svg width="' + (s||18) + '" height="' + (s||18) + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>'; }
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function inr(n){ return '₹' + Number(n || 0).toLocaleString('en-IN'); }
+
+  var $ = function(id){ return document.getElementById(id); };
+  var live = /^https:\/\/script\.google\.com\//.test(ENDPOINT), email = '', token = '', sample = false;
+  var SAMPLE = { name:'Aisha Khan', handle:'@aisha.skin.diaries', city:'Pune', topics:'Skincare, Lifestyle', followers:'5K–10K', status:'Verified', collabs:4, products:4, value:5200, ontime:4, points:600, rank:9, ranked:42, badges:['verified','founding','first','ontime'], note:'Glow & Grain loved your serum reel. Two new skincare brands are reviewing your profile this week.', board:true };
+  var ERR = { not_found:'We could not find that email. Use the email you joined with, or join free first.', bad_email:'Please enter a valid email, like name@gmail.com.',
+    too_many:'Too many tries. Please wait 10 minutes and try again.', bad_code:'That code is not right. Check the email and try again.', expired:'You were signed out. Please sign in again.',
+    offline:'Could not connect. Check your internet connection and try again.', soon:'Dashboards open very soon. Please check back, or email promoconnect.in@gmail.com.' };
+  function store(k, v){ try { if (v == null) sessionStorage.removeItem(k); else sessionStorage.setItem(k, v); } catch (e) {} }
+  function read(k){ try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+  function say(text, kind){ var m = $('msg'); m.textContent = text || ''; m.className = 'msg ' + (kind || ''); }
+  function call(params){
+    if (!live) return Promise.reject({ error: 'soon' });
+    return fetch(ENDPOINT, { method: 'POST', body: new URLSearchParams(params) }).then(function(r){ return r.json(); })
+      .then(function(d){ if (!d || d.v === undefined) throw { error: 'soon' }; if (!d.ok) throw { error: d.error || 'soon' }; return d; },
+            function(e){ throw (e && e.error) ? e : { error: 'offline' }; });
+  }
+  function busy(btn, on, text){ btn.disabled = on; if (on) { btn.dataset.t = btn.innerHTML; btn.textContent = text; } else if (btn.dataset.t) btn.innerHTML = btn.dataset.t; }
+
+  $('emailForm').addEventListener('submit', function(e){ e.preventDefault(); say('');
+    email = $('email').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { say(ERR.bad_email, 'err'); $('email').focus(); return; }
+    var b = $('sendBtn'); busy(b, true, 'Sending…');
+    call({ action: 'code', email: email }).then(function(){
+      $('emailForm').hidden = true; $('codeForm').hidden = false; $('gateLead').textContent = 'We sent a 6-digit code to ' + email + '. It works for 10 minutes. Check spam if you cannot see it.'; $('code').focus();
+    }).catch(function(er){ say(ERR[er.error] || ERR.soon, 'err'); }).then(function(){ busy(b, false); });
+  });
+  $('codeForm').addEventListener('submit', function(e){ e.preventDefault(); say('');
+    var code = $('code').value.replace(/\D/g, '');
+    if (code.length !== 6) { say('Please enter the 6-digit code.', 'err'); $('code').focus(); return; }
+    var b = $('codeBtn'); busy(b, true, 'Checking…');
+    call({ action: 'login', email: email, code: code }).then(function(d){ token = d.token; store('pc_token', token); open(d.me, false); })
+      .catch(function(er){ say(ERR[er.error] || ERR.soon, 'err'); }).then(function(){ busy(b, false); });
+  });
+  $('back').addEventListener('click', function(){ $('codeForm').hidden = true; $('emailForm').hidden = false; $('code').value = ''; say(''); $('gateLead').textContent = 'See your status, points, rank and badges. Sign in with the email you joined with. There is no password.'; $('email').focus(); });
+  $('sampleBtn').addEventListener('click', function(){ open(SAMPLE, true); });
+  $('sampleExit').addEventListener('click', out);
+  $('signOut').addEventListener('click', out);
+  function out(){ token = ''; store('pc_token', null); sample = false; $('dash').hidden = true; $('gate').hidden = false; $('codeForm').hidden = true; $('emailForm').hidden = false; $('code').value = ''; say(''); window.scrollTo(0, 0); }
+
+  function open(me, isSample){
+    sample = isSample; $('gate').hidden = true; $('dash').hidden = false; $('sampleBar').hidden = !isSample; $('signOut').hidden = isSample;
+    paint(me); window.scrollTo(0, 0);
+  }
+  function paint(me){
+    var first = String(me.name || '').split(' ')[0] || 'there';
+    $('dAv').textContent = (String(me.handle).replace(/^@/, '')[0] || first[0] || '?').toUpperCase();
+    $('dName').textContent = 'Hi, ' + first;
+    $('dMeta').textContent = [me.handle, me.city, me.followers ? me.followers + ' followers' : ''].filter(Boolean).join(' · ');
+    var s = String(me.status || 'Pending').toLowerCase(), key = s === 'verified' ? 'verified' : s === 'paused' ? 'paused' : 'pending';
+    var label = { verified: 'Verified creator', pending: 'Profile under review', paused: 'Paused' }[key], icon = { verified: '<path d="M5 12.5l4.5 4.5L19 7.5"/>', pending: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', paused: '<path d="M9 6v12M15 6v12"/>' }[key];
+    $('dStatus').className = 'status ' + key; $('dStatus').innerHTML = svg(icon, 14) + label;
+    $('tPoints').textContent = Number(me.points).toLocaleString('en-IN');
+    $('tRank').textContent = me.rank ? '#' + me.rank : '–';
+    $('tRankS').textContent = me.rank ? 'of ' + me.ranked + ' ranked creators' : 'Complete a collab to get ranked';
+    $('tCollabs').textContent = me.collabs;
+    $('tOntime').textContent = me.collabs ? me.ontime + ' of ' + me.collabs + ' posted on time' : 'Your first one is coming';
+    $('tProducts').textContent = me.products;
+    $('tValue').textContent = me.value ? 'Worth ' + inr(me.value) + ', yours to keep' : 'Free products appear here';
+    var steps = [[1, 'first'], [5, 'five'], [10, 'ten']], nx = steps.filter(function(x){ return me.collabs < x[0]; })[0];
+    $('nextBadge').innerHTML = nx
+      ? '<p style="margin:10px 0 0;color:var(--muted);font-size:15px">' + me.collabs + ' of ' + nx[0] + ' collabs to <b style="color:var(--ink)">' + BADGES[nx[1]].name + '</b></p><div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="' + nx[0] + '" aria-valuenow="' + me.collabs + '" aria-label="Progress to ' + BADGES[nx[1]].name + '"><i id="meterFill"></i></div>'
+      : '<p style="margin:10px 0 0;color:var(--muted);font-size:15px">You have earned every collab badge. Brilliant work.</p>';
+    if (nx) requestAnimationFrame(function(){ requestAnimationFrame(function(){ var f = $('meterFill'); if (f) f.style.width = Math.round(me.collabs / nx[0] * 100) + '%'; }); });
+    var have = me.badges || [];
+    $('dBadges').innerHTML = Object.keys(BADGES).map(function(k){ var got = have.indexOf(k) !== -1;
+      return '<div class="badge' + (got ? '' : ' locked') + '"><i>' + svg(got ? BADGES[k].icon : '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/>', 20) + '</i><div><b>' + BADGES[k].name + '</b><span>' + BADGES[k].how + '</span></div><span class="st">' + (got ? 'Earned' : 'Locked') + '</span></div>'; }).join('');
+    var next = key === 'pending'
+      ? ['We are reviewing your Instagram profile. This usually takes 2 working days.', 'Once you are verified, we match you with brands that fit your topics.', 'We email you when a brand wants to send you a product.']
+      : key === 'paused' ? ['Your profile is paused, so you will not get new matches.', 'Email promoconnect.in@gmail.com when you want to start again.']
+      : ['We email you when a brand wants to send you a product.', 'Post within 14 days of delivery, labelled #gifted or #ad, to earn the on-time bonus.', 'We check the post, then add your points here.'];
+    $('dNext').innerHTML = next.map(function(t, i){ return '<li><i>' + (i + 1) + '</i><span>' + esc(t) + '</span></li>'; }).join('');
+    $('dNote').hidden = !me.note; $('dNote').innerHTML = me.note ? '<b>Note from the team:</b> ' + esc(me.note) : '';
+    setBoard(!!me.board);
+  }
+  function setBoard(on){ $('boardSw').setAttribute('aria-checked', String(on)); $('boardText').textContent = on ? 'You are shown on the public Top 10 when your points put you there.' : 'Show my Instagram handle and achievements on the public Top 10.'; }
+  $('boardSw').addEventListener('click', function(){
+    var sw = $('boardSw'), on = sw.getAttribute('aria-checked') !== 'true', m = $('boardMsg'); m.textContent = ''; m.className = 'msg';
+    if (sample) { setBoard(on); return; }
+    sw.disabled = true;
+    call({ action: 'setboard', token: token, show: on ? 'Yes' : 'No' }).then(function(d){ setBoard(!!d.me.board); m.textContent = d.me.board ? 'Saved. You can appear on the Top 10.' : 'Saved. You are hidden from the Top 10.'; m.className = 'msg ok'; })
+      .catch(function(er){ if (er.error === 'expired') { out(); say(ERR.expired, 'err'); } else { m.textContent = ERR[er.error] || ERR.offline; m.className = 'msg err'; } })
+      .then(function(){ sw.disabled = false; });
+  });
+  $('code').addEventListener('input', function(){ this.value = this.value.replace(/[^\d ]/g, ''); });
+
+  // already signed in on this device?
+  var saved = read('pc_token');
+  if (saved && live) { token = saved; call({ action: 'me', token: token }).then(function(d){ open(d.me, false); }).catch(function(){ store('pc_token', null); token = ''; }); }
+  if (location.hash === '#sample') open(SAMPLE, true);
+})();
+</script>
+</body>
+</html>

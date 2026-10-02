@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Services | PromoConnect</title>
+<meta name="description" content="What PromoConnect does for brands and creators: matching, gifted and paid collaborations, post checking, managed campaigns, dashboard and Top 10.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: warm paper page, one idea per band, rounded cards; PromoConnect blue is the only accent, yellow marks creators */
+:root{--bg:#f6f3ee;--bg2:#ece7df;--ink:#121212;--muted:#5f5b55;--line:rgba(18,18,18,.12);--card:#fffdf9;--field:#ffffff;--acc:#1F55F0;--acc-ink:#fff;--soft:rgba(31,85,240,.10);--sun:#F5B638;--sun-soft:rgba(245,182,56,.18);--good:#1a7a50;--good-soft:rgba(26,122,80,.12);--warn:#9a6400;--warn-soft:rgba(245,182,56,.2);--err:#C2362B;--shadow:0 30px 60px -28px rgba(20,25,60,.28);
+  --display:Geist,system-ui,-apple-system,"Segoe UI",sans-serif;--serif:"Instrument Serif",Georgia,serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0c0c0d;--bg2:#141416;--ink:#f3efe8;--muted:#a19c94;--line:rgba(243,239,232,.14);--card:#18181b;--field:#111113;--acc:#5C84FF;--acc-ink:#0a0f24;--soft:rgba(92,132,255,.16);--sun-soft:rgba(245,182,56,.16);--good:#4cc38a;--good-soft:rgba(76,195,138,.14);--warn:#F5B638;--warn-soft:rgba(245,182,56,.14);--err:#FF7A6E;--shadow:0 30px 60px -28px rgba(0,0,0,.7)}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0c0c0d;--bg2:#141416;--ink:#f3efe8;--muted:#a19c94;--line:rgba(243,239,232,.14);--card:#18181b;--field:#111113;--acc:#5C84FF;--acc-ink:#0a0f24;--soft:rgba(92,132,255,.16);--sun-soft:rgba(245,182,56,.16);--good:#4cc38a;--good-soft:rgba(76,195,138,.14);--warn:#F5B638;--warn-soft:rgba(245,182,56,.14);--err:#FF7A6E;--shadow:0 30px 60px -28px rgba(0,0,0,.7)}
+*,*::before,*::after{box-sizing:border-box}
+html,body{max-width:100%;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 var(--display);-webkit-font-smoothing:antialiased;touch-action:pan-y pinch-zoom;overscroll-behavior-x:none}
+a{color:var(--acc)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+[hidden]{display:none!important}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-weight:600;letter-spacing:-.035em;line-height:1.05;margin:0;text-wrap:balance}
+.serif{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-.01em;color:var(--acc)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 8px;background:var(--card)}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px var(--soft)}
+.hero{padding-block:clamp(44px,7vw,84px) clamp(28px,4vw,44px)}
+.hero h1{font-size:clamp(40px,6.6vw,80px);margin-top:18px;max-width:16ch}
+.hero p.lead{color:var(--muted);font-size:clamp(17px,1.7vw,20px);max-width:52ch;margin:18px 0 0}
+.band{padding-block:clamp(36px,6vw,72px)}
+.band h2{font-size:clamp(28px,4vw,46px)}
+.band .sub{color:var(--muted);max-width:56ch;margin:12px 0 0}
+.btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;padding:14px 22px;font-weight:600;font-size:16px;text-decoration:none;cursor:pointer}
+.btn.acc{background:var(--acc);color:var(--acc-ink);box-shadow:0 12px 30px -12px var(--acc)}
+.btn.dark{background:var(--ink);color:var(--bg)}
+.btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn[disabled]{opacity:.6;cursor:progress}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:clamp(20px,3vw,28px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.grid>*{min-width:0}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 11px;border-radius:999px;background:var(--soft);color:var(--ink);white-space:nowrap}
+.note{font-size:13px;color:var(--muted)}
+.final{background:var(--ink);color:var(--bg);border-radius:clamp(26px,4vw,40px);padding:clamp(36px,6vw,72px) clamp(22px,5vw,64px);margin-block:clamp(36px,6vw,72px)}
+.final h2{font-size:clamp(32px,5vw,60px);max-width:14ch}
+.final .serif{color:#8FAEFF}
+.final p{color:color-mix(in srgb,var(--bg) 70%,transparent);max-width:44ch;margin:14px 0 0}
+.final .btn.line{color:var(--bg);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--bg) 30%,transparent)}
+footer{border-top:1px solid var(--line);padding:28px 0 44px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 18px}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--ink)}
+/* one gentle entrance when the page opens; nothing keeps moving */
+.rise{animation:rise .7s cubic-bezier(.2,.8,.2,1) both}
+.rise.d1{animation-delay:.08s}.rise.d2{animation-delay:.16s}.rise.d3{animation-delay:.24s}.rise.d4{animation-delay:.32s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.rise{animation:none}html{scroll-behavior:auto}}
+/* explainer video in a phone frame */
+.vphone{width:min(100%,300px);aspect-ratio:9/16;border-radius:38px;background:#0d0d0f;padding:9px;box-shadow:var(--shadow),inset 0 0 0 2px #2a2a2e;margin-inline:auto}
+.vphone video{display:block;width:100%;height:100%;border-radius:30px;object-fit:cover;background:#0b0d1c}
+
+/* shared menu */
+.pn{position:sticky;top:0;z-index:40;padding-top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line)}
+.pn-in{max-width:1200px;margin:0 auto;padding:0 20px;height:64px;display:flex;align-items:center;gap:10px}
+.pn-logo{display:flex;align-items:center;gap:9px;margin-right:auto;font-weight:700;font-size:19px;letter-spacing:-.04em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.pn-logo img{width:30px;height:30px;border-radius:9px}
+.pn-links{display:flex;gap:2px}
+.pn-links a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:500;padding:8px 12px;border-radius:999px;white-space:nowrap}
+.pn-links a:hover{color:var(--ink)}
+.pn-links a[aria-current]{color:var(--ink);background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.pn-dash,.pn-join{font-size:14px;font-weight:600;text-decoration:none;border-radius:999px;padding:10px 16px;white-space:nowrap}
+.pn-dash{color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.pn-join{background:var(--ink);color:var(--bg)}
+.pn-menu{display:none;width:42px;height:42px;border-radius:50%;border:0;box-shadow:inset 0 0 0 1.5px var(--line);background:transparent;color:var(--ink);cursor:pointer;place-items:center;padding:0}
+.pn-menu span{display:block;width:16px;height:2px;border-radius:2px;background:currentColor;margin:2.5px auto;transition:transform .25s}
+.pn-menu[aria-expanded="true"] span:first-child{transform:translateY(3.5px) rotate(45deg)}
+.pn-menu[aria-expanded="true"] span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+.pn-panel{max-width:1200px;margin:0 auto;padding:6px 20px 18px;display:grid}
+.pn-panel[hidden]{display:none}
+.pn-panel a{padding:14px 4px;font-size:17px;font-weight:500;color:var(--ink);text-decoration:none;border-top:1px solid var(--line);display:flex;justify-content:space-between}
+.pn-panel a::after{content:"›";color:var(--muted)}
+@media (max-width:1060px){.pn-links,.pn-dash{display:none}.pn-menu{display:grid}}
+@media (min-width:1061px){.pn-panel{display:none!important}}
+
+.seg{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.svc{display:grid;gap:8px;align-content:start}
+.svc .si{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:var(--soft);color:var(--acc);margin-bottom:6px}
+.svc.sun .si{background:var(--sun-soft);color:var(--ink)}
+.svc h3{font-size:20px}
+.svc p{margin:0;color:var(--muted);font-size:15px}
+.svc .pr{margin-top:6px;font-size:14px;font-weight:600;padding-top:12px;border-top:1px solid var(--line)}
+.steps3{counter-reset:s;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));margin-top:26px;padding:0;list-style:none}
+.steps3 li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px}
+.steps3 li::before{content:counter(s);font-family:var(--serif);font-style:italic;font-size:46px;line-height:1;color:var(--acc);display:block;margin-bottom:10px}
+.steps3 b{display:block;font-size:19px;letter-spacing:-.02em}
+.steps3 span{color:var(--muted);font-size:15px}
+</style>
+</head>
+<body>
+<header class="pn" id="nav"><div class="pn-in">
+  <a class="pn-logo" href="index.html"><img src="logo.png" alt="">PromoConnect</a>
+  <nav class="pn-links" aria-label="Main"><a href="index.html#how">How it works</a><a href="services.html" aria-current="page">Services</a><a href="leaderboard.html">Top 10</a><a href="pricing.html">Pricing</a><a href="help.html">Help</a><a href="https://instagram.com/promoconnect.in">Instagram</a></nav>
+  <a class="pn-dash" href="dashboard.html">My dashboard</a>
+  <a class="pn-join" href="join.html">Join free</a>
+  <button class="pn-menu" type="button" aria-expanded="false" aria-controls="pnPanel" aria-label="Menu"><span></span><span></span></button>
+</div><nav class="pn-panel" id="pnPanel" aria-label="Menu" hidden><a href="index.html#how">How it works</a><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="pricing.html">Pricing</a><a href="help.html">Help</a><a href="https://instagram.com/promoconnect.in">Instagram</a><a href="dashboard.html">My dashboard</a><a href="contact.html">Contact</a></nav></header>
+<main>
+
+<div class="wrap hero">
+  <span class="eyebrow rise"><i></i>Services</span>
+  <h1 class="rise d1">Everything a collab needs, <span class="serif">done for you.</span></h1>
+  <p class="lead rise d2">Matching, shipping updates, post checks, payments and results. Here is exactly what brands and creators get.</p>
+  <div class="ctas rise d3"><a class="btn acc" href="join.html#brand">I'm a brand →</a><a class="btn line" href="join.html#creator">I'm a creator →</a></div>
+</div>
+
+<section class="band wrap" id="brands" style="padding-top:12px">
+  <div class="seg"><i class="dot" style="background:var(--acc)"></i>For brands</div>
+  <h2>Real content from real people.</h2>
+  <p class="sub">Every plan includes matching, gifted collaborations and post checking. Add the extras when you need them.</p>
+  <div class="grid" style="margin-top:26px"><div class="card svc "><span class="si"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></svg></span><h3>Creator matching</h3><p>We shortlist creators who fit your product, audience and city. You approve every one before anything ships.</p><span class="pr">Included in every plan</span></div><div class="card svc "><span class="si"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg></span><h3>Gifted collaborations</h3><p>Send your product, get an honest reel, post or review in return. The simplest way to start.</p><span class="pr">Included in every plan</span></div><div class="card svc "><span class="si"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h12M6 9h12M9 4c6 0 6 9 0 9H6l8 7"/></svg></span><h3>Paid collaborations</h3><p>Add cash for bigger creators. Your payment is held safely until the post is checked.</p><span class="pr">12%, 10% or 8% commission by plan</span></div><div class="card svc "><span class="si"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><h3>Post checking</h3><p>We confirm every post went live, carries #ad or #gifted, and stays up for 30 days.</p><span class="pr">Included in every plan</span></div><div class="card svc "><span class="si"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg></span><h3>Featured listing</h3><p>Your product sits at the top of the list creators see first.</p><span class="pr">₹1,499 a week</span></div><div class="card svc "><span class="si"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 5a3.5 3.5 0 010 6.5M18.5 14.8c1.7.8 2.7 2.5 3 5.2"/></svg></span><h3>Managed campaign</h3><p>Tell us the goal. We pick the creators, write the brief and run the whole campaign.</p><span class="pr">From ₹25,000</span></div><div class="card svc "><span class="si"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/></svg></span><h3>Content usage rights</h3><p>Reuse creator content in your own ads and on your product pages.</p><span class="pr">Included in Elite</span></div><div class="card svc "><span class="si"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V11M10 20V4M16 20v-7M22 20H2"/></svg></span><h3>Results report</h3><p>Views, engagement and links for every collaboration, in one monthly report.</p><span class="pr">Included in Pro and Elite</span></div></div>
+  <p class="note" style="margin-top:16px">Prices are in Indian rupees, taxes extra where applicable. Founding brands get their first collaborations free. <a href="pricing.html">See all plans</a></p>
+</section>
+
+<section class="band wrap" id="creators" style="padding-top:0">
+  <div class="seg"><i class="dot" style="background:var(--sun)"></i>For creators</div>
+  <h2>Free products, and a record you can show.</h2>
+  <p class="sub">Join free. Every collaboration you finish builds your points, badges and rank.</p>
+  <div class="grid" style="margin-top:26px"><div class="card svc sun"><span class="si"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg></span><h3>Free products</h3><p>Apply to homegrown brands you like and keep every product you review.</p><span class="pr">Free</span></div><div class="card svc sun"><span class="si"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h12M6 9h12M9 4c6 0 6 9 0 9H6l8 7"/></svg></span><h3>Paid deals</h3><p>Earn cash on bigger collaborations, paid to your bank account or UPI ID after your post is checked.</p><span class="pr">10% fee, 5% on Pro, 0% on Elite</span></div><div class="card svc sun"><span class="si"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="10" rx="2"/><rect x="13" y="3" width="8" height="6" rx="2"/><rect x="13" y="11" width="8" height="10" rx="2"/><rect x="3" y="15" width="8" height="6" rx="2"/></svg></span><h3>My dashboard</h3><p>See your status, points, rank, products received and badges in one place.</p><span class="pr">Free</span></div><div class="card svc sun"><span class="si"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v5a5 5 0 01-10 0z"/><path d="M7 6H4a3 3 0 003 4M17 6h3a3 3 0 01-3 4M12 14v4M8 21h8M9 18h6"/></svg></span><h3>Top 10 and badges</h3><p>Earn points for every collaboration and on-time post. Show your achievements on the public Top 10.</p><span class="pr">Free</span></div><div class="card svc sun"><span class="si"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18h16l1-10-5 4-4-7-4 7-5-4z"/></svg></span><h3>Creator Pro and Elite</h3><p>More applications, a profile badge and 24-hour early access. Elite adds first pick of premium products and a featured profile.</p><span class="pr">₹399 or ₹999 a month</span></div></div>
+</section>
+
+<section class="band wrap" style="padding-top:0">
+  <h2>How we work with you</h2>
+  <ol class="steps3">
+    <li><b>You tell us what you need</b><span>Brands share the product and who it is for. Creators share their Instagram, topics and city.</span></li>
+    <li><b>We match and you approve</b><span>Nothing ships and nobody posts until both sides say yes.</span></li>
+    <li><b>We check and report</b><span>We confirm delivery, check the post and its label, then update points and results.</span></li>
+  </ol>
+  <div class="final">
+    <h2>Ready when <span class="serif">you are.</span></h2>
+    <p>Join free in two minutes. We email you when your first match is ready.</p>
+    <div class="ctas"><a class="btn acc" href="join.html#brand">List your product →</a><a class="btn line" href="join.html#creator">Join as a creator →</a></div>
+  </div>
+</section>
+
+</main>
+<footer><div class="wrap">
+  <span>© 2026 PromoConnect · Made in India · promoconnect.in@gmail.com · <a href="https://instagram.com/promoconnect.in" target="_blank" rel="noopener">Instagram @promoconnect.in</a></span>
+  <nav><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="dashboard.html">My dashboard</a><a href="help.html">Help</a><a href="pricing.html">Pricing</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="refund.html">Refunds</a><a href="contact.html">Contact</a></nav>
+</div></footer>
+<script>(function(){var b=document.querySelector('.pn-menu'),p=document.getElementById('pnPanel');if(!b||!p)return;
+b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));p.hidden=o;});
+p.addEventListener('click',function(e){if(e.target.closest('a')){b.setAttribute('aria-expanded','false');p.hidden=true;}});})();</script>
+
+</body>
+</html>

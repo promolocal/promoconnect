@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Top 10 creators | PromoConnect</title>
+<meta name="description" content="The PromoConnect Top 10: creators ranked by completed collaborations and on-time posts, with the badges they have earned.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: warm paper page, one idea per band, rounded cards; PromoConnect blue is the only accent, yellow marks creators */
+:root{--bg:#f6f3ee;--bg2:#ece7df;--ink:#121212;--muted:#5f5b55;--line:rgba(18,18,18,.12);--card:#fffdf9;--field:#ffffff;--acc:#1F55F0;--acc-ink:#fff;--soft:rgba(31,85,240,.10);--sun:#F5B638;--sun-soft:rgba(245,182,56,.18);--good:#1a7a50;--good-soft:rgba(26,122,80,.12);--warn:#9a6400;--warn-soft:rgba(245,182,56,.2);--err:#C2362B;--shadow:0 30px 60px -28px rgba(20,25,60,.28);
+  --display:Geist,system-ui,-apple-system,"Segoe UI",sans-serif;--serif:"Instrument Serif",Georgia,serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0c0c0d;--bg2:#141416;--ink:#f3efe8;--muted:#a19c94;--line:rgba(243,239,232,.14);--card:#18181b;--field:#111113;--acc:#5C84FF;--acc-ink:#0a0f24;--soft:rgba(92,132,255,.16);--sun-soft:rgba(245,182,56,.16);--good:#4cc38a;--good-soft:rgba(76,195,138,.14);--warn:#F5B638;--warn-soft:rgba(245,182,56,.14);--err:#FF7A6E;--shadow:0 30px 60px -28px rgba(0,0,0,.7)}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0c0c0d;--bg2:#141416;--ink:#f3efe8;--muted:#a19c94;--line:rgba(243,239,232,.14);--card:#18181b;--field:#111113;--acc:#5C84FF;--acc-ink:#0a0f24;--soft:rgba(92,132,255,.16);--sun-soft:rgba(245,182,56,.16);--good:#4cc38a;--good-soft:rgba(76,195,138,.14);--warn:#F5B638;--warn-soft:rgba(245,182,56,.14);--err:#FF7A6E;--shadow:0 30px 60px -28px rgba(0,0,0,.7)}
+*,*::before,*::after{box-sizing:border-box}
+html,body{max-width:100%;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 var(--display);-webkit-font-smoothing:antialiased;touch-action:pan-y pinch-zoom;overscroll-behavior-x:none}
+a{color:var(--acc)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+[hidden]{display:none!important}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-weight:600;letter-spacing:-.035em;line-height:1.05;margin:0;text-wrap:balance}
+.serif{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-.01em;color:var(--acc)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 8px;background:var(--card)}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px var(--soft)}
+.hero{padding-block:clamp(44px,7vw,84px) clamp(28px,4vw,44px)}
+.hero h1{font-size:clamp(40px,6.6vw,80px);margin-top:18px;max-width:16ch}
+.hero p.lead{color:var(--muted);font-size:clamp(17px,1.7vw,20px);max-width:52ch;margin:18px 0 0}
+.band{padding-block:clamp(36px,6vw,72px)}
+.band h2{font-size:clamp(28px,4vw,46px)}
+.band .sub{color:var(--muted);max-width:56ch;margin:12px 0 0}
+.btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;padding:14px 22px;font-weight:600;font-size:16px;text-decoration:none;cursor:pointer}
+.btn.acc{background:var(--acc);color:var(--acc-ink);box-shadow:0 12px 30px -12px var(--acc)}
+.btn.dark{background:var(--ink);color:var(--bg)}
+.btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn[disabled]{opacity:.6;cursor:progress}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:clamp(20px,3vw,28px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.grid>*{min-width:0}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 11px;border-radius:999px;background:var(--soft);color:var(--ink);white-space:nowrap}
+.note{font-size:13px;color:var(--muted)}
+.final{background:var(--ink);color:var(--bg);border-radius:clamp(26px,4vw,40px);padding:clamp(36px,6vw,72px) clamp(22px,5vw,64px);margin-block:clamp(36px,6vw,72px)}
+.final h2{font-size:clamp(32px,5vw,60px);max-width:14ch}
+.final .serif{color:#8FAEFF}
+.final p{color:color-mix(in srgb,var(--bg) 70%,transparent);max-width:44ch;margin:14px 0 0}
+.final .btn.line{color:var(--bg);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--bg) 30%,transparent)}
+footer{border-top:1px solid var(--line);padding:28px 0 44px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 18px}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--ink)}
+/* one gentle entrance when the page opens; nothing keeps moving */
+.rise{animation:rise .7s cubic-bezier(.2,.8,.2,1) both}
+.rise.d1{animation-delay:.08s}.rise.d2{animation-delay:.16s}.rise.d3{animation-delay:.24s}.rise.d4{animation-delay:.32s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.rise{animation:none}html{scroll-behavior:auto}}
+/* explainer video in a phone frame */
+.vphone{width:min(100%,300px);aspect-ratio:9/16;border-radius:38px;background:#0d0d0f;padding:9px;box-shadow:var(--shadow),inset 0 0 0 2px #2a2a2e;margin-inline:auto}
+.vphone video{display:block;width:100%;height:100%;border-radius:30px;object-fit:cover;background:#0b0d1c}
+
+/* shared menu */
+.pn{position:sticky;top:0;z-index:40;padding-top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line)}
+.pn-in{max-width:1200px;margin:0 auto;padding:0 20px;height:64px;display:flex;align-items:center;gap:10px}
+.pn-logo{display:flex;align-items:center;gap:9px;margin-right:auto;font-weight:700;font-size:19px;letter-spacing:-.04em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.pn-logo img{width:30px;height:30px;border-radius:9px}
+.pn-links{display:flex;gap:2px}
+.pn-links a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:500;padding:8px 12px;border-radius:999px;white-space:nowrap}
+.pn-links a:hover{color:var(--ink)}
+.pn-links a[aria-current]{color:var(--ink);background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.pn-dash,.pn-join{font-size:14px;font-weight:600;text-decoration:none;border-radius:999px;padding:10px 16px;white-space:nowrap}
+.pn-dash{color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.pn-join{background:var(--ink);color:var(--bg)}
+.pn-menu{display:none;width:42px;height:42px;border-radius:50%;border:0;box-shadow:inset 0 0 0 1.5px var(--line);background:transparent;color:var(--ink);cursor:pointer;place-items:center;padding:0}
+.pn-menu span{display:block;width:16px;height:2px;border-radius:2px;background:currentColor;margin:2.5px auto;transition:transform .25s}
+.pn-menu[aria-expanded="true"] span:first-child{transform:translateY(3.5px) rotate(45deg)}
+.pn-menu[aria-expanded="true"] span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+.pn-panel{max-width:1200px;margin:0 auto;padding:6px 20px 18px;display:grid}
+.pn-panel[hidden]{display:none}
+.pn-panel a{padding:14px 4px;font-size:17px;font-weight:500;color:var(--ink);text-decoration:none;border-top:1px solid var(--line);display:flex;justify-content:space-between}
+.pn-panel a::after{content:"›";color:var(--muted)}
+@media (max-width:1060px){.pn-links,.pn-dash{display:none}.pn-menu{display:grid}}
+@media (min-width:1061px){.pn-panel{display:none!important}}
+
+.lb-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px}
+.state{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;border-radius:999px;padding:7px 13px;background:var(--card);border:1px solid var(--line);color:var(--muted)}
+.state i{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.state.live{color:var(--good);background:var(--good-soft);border-color:transparent}.state.live i{background:var(--good)}
+.state.preview{color:var(--warn);background:var(--warn-soft);border-color:transparent}.state.preview i{background:var(--warn)}
+.banner{margin-top:18px;border-radius:18px;padding:14px 18px;background:var(--warn-soft);font-size:15px}
+.podium{display:grid;gap:16px;grid-template-columns:repeat(3,1fr);align-items:end;margin-top:28px}
+.pod{min-width:0;background:var(--card);border:1px solid var(--line);border-radius:26px;padding:22px 16px;text-align:center;position:relative}
+.pod.p1{padding-block:34px;border-color:transparent;background:var(--ink);color:var(--bg);box-shadow:var(--shadow)}
+.pod .medal{position:absolute;top:-16px;left:50%;transform:translateX(-50%);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:15px;background:var(--bg2);color:var(--ink);box-shadow:0 0 0 4px var(--bg)}
+.pod.p1 .medal{background:var(--sun);color:#121212}
+.av{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:24px;color:#fff;margin:6px auto 10px;flex:none}
+.pod.p1 .av{width:80px;height:80px;font-size:30px}
+.pod .h{font-weight:600;font-size:16px;letter-spacing:-.02em;overflow-wrap:anywhere}
+.pod .m{font-size:13px;color:var(--muted)}
+.pod.p1 .m{color:color-mix(in srgb,var(--bg) 65%,transparent)}
+.pod .pts{font-size:clamp(26px,3.4vw,38px);font-weight:600;letter-spacing:-.04em;margin-top:10px;font-variant-numeric:tabular-nums}
+.pod .pts small{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted)}
+.pod.p1 .pts small{color:color-mix(in srgb,var(--bg) 65%,transparent)}
+.bd{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:10px}
+.bd span{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:var(--soft);color:var(--acc)}
+.pod.p1 .bd span{background:rgba(255,255,255,.12);color:var(--sun)}
+@media (max-width:640px){
+  .podium{grid-template-columns:1fr;gap:8px}.pod.p1{order:-1}
+  .pod,.pod.p1{display:grid;grid-template-columns:30px 1fr auto;gap:2px 12px;text-align:left;align-items:center;padding:14px 16px;border-radius:18px}
+  .pod .medal{position:static;transform:none;box-shadow:none;grid-row:1 / span 2;width:30px;height:30px;font-size:14px}
+  .pod .av{display:none}
+  .pod .who{grid-column:2;min-width:0}
+  .pod .h{font-size:15px}
+  .pod .pts{grid-column:3;grid-row:1 / span 2;margin:0;font-size:20px;white-space:nowrap}
+  .pod .bd{grid-column:2;justify-content:flex-start;margin-top:4px}
+  .pod .bd span{width:24px;height:24px;border-radius:8px}
+  .row{grid-template-columns:22px 36px 1fr auto;gap:10px;padding:12px 14px}
+  .row .av{width:36px;height:36px;font-size:15px}
+  .row .h{font-size:15px}
+  .row .pts{font-size:16px}
+}
+.rows{margin-top:16px;display:grid;gap:8px}
+.row{display:grid;grid-template-columns:34px 44px 1fr auto;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 16px}
+.row .rk{font-weight:600;color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+.row .av{width:44px;height:44px;font-size:17px;margin:0}
+.row>div{min-width:0}
+.row .h{font-weight:600;overflow-wrap:anywhere}
+.row .m{font-size:13px;color:var(--muted)}
+.row .bd{justify-content:flex-start;margin-top:6px}
+.row .bd span{width:24px;height:24px;border-radius:8px}
+.row .pts{font-weight:600;font-size:19px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row .pts small{font-size:12px;font-weight:500;color:var(--muted)}
+.sk{height:70px;border-radius:18px;background:var(--bg2)}
+.rule{display:grid;gap:8px;align-content:start}
+.rule .big{font-size:44px;font-weight:600;letter-spacing:-.04em;line-height:1;color:var(--acc)}
+.rule h3{font-size:19px}.rule p{margin:0;color:var(--muted);font-size:15px}
+.legend{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));margin-top:24px}
+.legend>div{display:flex;gap:12px;align-items:center;min-width:0}
+.legend i{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--soft);color:var(--acc);flex:none}
+.legend b{display:block;font-size:15px}.legend span{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="pn" id="nav"><div class="pn-in">
+  <a class="pn-logo" href="index.html"><img src="logo.png" alt="">PromoConnect</a>
+  <nav class="pn-links" aria-label="Main"><a href="index.html#how">How it works</a><a href="services.html">Services</a><a href="leaderboard.html" aria-current="page">Top 10</a><a href="pricing.html">Pricing</a><a href="help.html">Help</a><a href="https://instagram.com/promoconnect.in">Instagram</a></nav>
+  <a class="pn-dash" href="dashboard.html">My dashboard</a>
+  <a class="pn-join" href="join.html">Join free</a>
+  <button class="pn-menu" type="button" aria-expanded="false" aria-controls="pnPanel" aria-label="Menu"><span></span><span></span></button>
+</div><nav class="pn-panel" id="pnPanel" aria-label="Menu" hidden><a href="index.html#how">How it works</a><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="pricing.html">Pricing</a><a href="help.html">Help</a><a href="https://instagram.com/promoconnect.in">Instagram</a><a href="dashboard.html">My dashboard</a><a href="contact.html">Contact</a></nav></header>
+<main>
+
+<div class="wrap hero" style="padding-bottom:0">
+  <div class="lb-head">
+    <div>
+      <span class="eyebrow rise"><i></i>Leaderboard</span>
+      <h1 class="rise d1">Top 10 <span class="serif">creators.</span></h1>
+      <p class="lead rise d2">Ranked by completed collaborations and on-time posts. Updated after every collaboration is checked.</p>
+    </div>
+    <span class="state" id="state"><i></i><span id="stateText">Loading</span></span>
+  </div>
+  <div class="banner" id="banner" hidden><b>Preview.</b> These are example creators that show how the Top 10 will look. Real rankings appear here after the first collaborations are completed.</div>
+</div>
+
+<section class="wrap" aria-live="polite">
+  <div class="podium" id="podium"></div>
+  <div class="rows" id="rows"><div class="sk"></div><div class="sk"></div><div class="sk"></div></div>
+</section>
+
+<section class="band wrap">
+  <h2>How points work</h2>
+  <div class="grid" style="margin-top:24px">
+    <div class="card rule"><span class="big">+100</span><h3>Every completed collab</h3><p>You received the product, posted, and we checked the post and its label.</p></div>
+    <div class="card rule"><span class="big">+50</span><h3>Every on-time post</h3><p>A bonus when the post goes live within 14 days of delivery.</p></div>
+    <div class="card rule"><span class="big" style="color:var(--ink)">Top 10</span><h3>Your choice to appear</h3><p>Only creators who switch on "Show me on the Top 10" in their dashboard are listed.</p></div>
+  </div>
+  <h2 style="margin-top:clamp(36px,6vw,64px)">Badges you can earn</h2>
+  <div class="legend" id="legend"></div>
+  <div class="final">
+    <h2>Your name could be <span class="serif">here.</span></h2>
+    <p>Join free, complete your first collaboration and start earning points.</p>
+    <div class="ctas"><a class="btn acc" href="join.html#creator">Join as a creator →</a><a class="btn line" href="dashboard.html">Open my dashboard</a></div>
+  </div>
+</section>
+
+</main>
+<footer><div class="wrap">
+  <span>© 2026 PromoConnect · Made in India · promoconnect.in@gmail.com · <a href="https://instagram.com/promoconnect.in" target="_blank" rel="noopener">Instagram @promoconnect.in</a></span>
+  <nav><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="dashboard.html">My dashboard</a><a href="help.html">Help</a><a href="pricing.html">Pricing</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="refund.html">Refunds</a><a href="contact.html">Contact</a></nav>
+</div></footer>
+<script>(function(){var b=document.querySelector('.pn-menu'),p=document.getElementById('pnPanel');if(!b||!p)return;
+b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));p.hidden=o;});
+p.addEventListener('click',function(e){if(e.target.closest('a')){b.setAttribute('aria-expanded','false');p.hidden=true;}});})();</script>
+<script>
+(function(){
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyYXvMHUr0huQLzTiupv0fo-H-aEklPTzNxd1v0Oq5pc_h9wiHvZJzfoxpsz7Gy4agq/exec';
+
+var BADGES = {
+  verified: { name: 'Verified', how: 'Profile checked by PromoConnect', icon: '<path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>' },
+  founding: { name: 'Founding creator', how: 'One of the first 100 creators to join', icon: '<path d="M5 21V4M5 4h12l-2 4 2 4H5"/>' },
+  first:    { name: 'First collab', how: 'Completed 1 collaboration', icon: '<path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/>' },
+  five:     { name: 'Rising creator', how: 'Completed 5 collaborations', icon: '<path d="M4 20V11M10 20V4M16 20v-7M22 20H2"/>' },
+  ten:      { name: 'Pro creator', how: 'Completed 10 collaborations', icon: '<path d="M4 18h16l1-10-5 4-4-7-4 7-5-4z"/>' },
+  ontime:   { name: 'Always on time', how: '3 or more collabs, every post on time', icon: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>' }
+};
+function svg(d, s){ return '<svg width="' + (s||18) + '" height="' + (s||18) + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>'; }
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function inr(n){ return '₹' + Number(n || 0).toLocaleString('en-IN'); }
+
+  var COLORS = ['#B4537A','#2E7D5B','#D9822B','#5B4CC4','#1F7A8C','#C0396B','#3E6FD8','#8A5A2B','#3F8F4F','#7A3E9D'];
+  var SAMPLE = [
+    { handle:'@aisha.skin.diaries', city:'Pune', topic:'Skincare', collabs:12, ontime:12, points:1800, badges:['verified','founding','first','five','ten','ontime'] },
+    { handle:'@rohan.fits', city:'Delhi', topic:'Fitness', collabs:10, ontime:9, points:1450, badges:['verified','founding','first','five','ten'] },
+    { handle:'@meera.eats', city:'Jaipur', topic:'Food', collabs:9, ontime:9, points:1350, badges:['verified','founding','first','five','ontime'] },
+    { handle:'@kabir.styles', city:'Mumbai', topic:'Fashion', collabs:8, ontime:7, points:1150, badges:['verified','founding','first','five'] },
+    { handle:'@tara.homeedit', city:'Bengaluru', topic:'Home', collabs:7, ontime:7, points:1050, badges:['verified','first','five','ontime'] },
+    { handle:'@zoya.glow', city:'Lucknow', topic:'Beauty', collabs:6, ontime:6, points:900, badges:['verified','founding','first','five','ontime'] },
+    { handle:'@arjun.gadgets', city:'Hyderabad', topic:'Tech', collabs:6, ontime:4, points:800, badges:['verified','first','five'] },
+    { handle:'@nisha.bakes', city:'Indore', topic:'Food', collabs:5, ontime:5, points:750, badges:['verified','first','five','ontime'] },
+    { handle:'@dev.runs', city:'Chandigarh', topic:'Fitness', collabs:4, ontime:4, points:600, badges:['verified','founding','first','ontime'] },
+    { handle:'@ira.threads', city:'Surat', topic:'Fashion', collabs:3, ontime:2, points:400, badges:['verified','first'] }
+  ];
+  function initial(h){ return esc((String(h).replace(/^@/, '')[0] || '?').toUpperCase()); }
+  function badges(b){ return '<div class="bd">' + (b || []).filter(function(k){ return BADGES[k]; }).map(function(k){ return '<span title="' + esc(BADGES[k].name) + '" role="img" aria-label="' + esc(BADGES[k].name) + '">' + svg(BADGES[k].icon, 15) + '</span>'; }).join('') + '</div>'; }
+  function meta(r){ return esc(r.topic) + ' · ' + esc(r.city) + ' · ' + Number(r.collabs) + (Number(r.collabs) === 1 ? ' collab' : ' collabs'); }
+  function render(list){
+    var top = list.slice(0, 3), rest = list.slice(3, 10), order = [1, 0, 2];
+    document.getElementById('podium').innerHTML = order.filter(function(i){ return top[i]; }).map(function(i){ var r = top[i];
+      return '<div class="pod p' + (i + 1) + '"><span class="medal">' + (i + 1) + '</span><div class="av" style="background:' + COLORS[i] + '">' + initial(r.handle) + '</div><div class="who"><div class="h">' + esc(r.handle) + '</div><div class="m">' + meta(r) + '</div></div><div class="pts">' + Number(r.points).toLocaleString('en-IN') + ' <small>pts</small></div>' + badges(r.badges) + '</div>'; }).join('');
+    document.getElementById('rows').innerHTML = rest.map(function(r, k){ var i = k + 3;
+      return '<div class="row"><span class="rk">' + (i + 1) + '</span><div class="av" style="background:' + COLORS[i % COLORS.length] + '">' + initial(r.handle) + '</div><div><div class="h">' + esc(r.handle) + '</div><div class="m">' + meta(r) + '</div>' + badges(r.badges) + '</div><div class="pts">' + Number(r.points).toLocaleString('en-IN') + ' <small>pts</small></div></div>'; }).join('');
+  }
+  function show(list, live){
+    var st = document.getElementById('state');
+    st.className = 'state ' + (live ? 'live' : 'preview');
+    document.getElementById('stateText').textContent = live ? 'Live rankings' : 'Preview · example data';
+    document.getElementById('banner').hidden = live;
+    render(list);
+  }
+  document.getElementById('legend').innerHTML = Object.keys(BADGES).map(function(k){ return '<div><i>' + svg(BADGES[k].icon, 20) + '</i><div><b>' + BADGES[k].name + '</b><span>' + BADGES[k].how + '</span></div></div>'; }).join('');
+  var ok = /^https:\/\/script\.google\.com\//.test(ENDPOINT);
+  if (!ok) { show(SAMPLE, false); return; }
+  var done = false, t = setTimeout(function(){ if (!done) { done = true; show(SAMPLE, false); } }, 9000);
+  fetch(ENDPOINT + '?action=leaderboard').then(function(r){ return r.json(); }).then(function(d){
+    if (done) return; done = true; clearTimeout(t);
+    if (d && d.top && d.top.length) show(d.top, true); else show(SAMPLE, false);
+  }).catch(function(){ if (done) return; done = true; clearTimeout(t); show(SAMPLE, false); });
+})();
+</script>
+</body>
+</html>

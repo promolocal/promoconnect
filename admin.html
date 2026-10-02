@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Owner admin | PromoConnect</title>
+<meta name="description" content="PromoConnect owner admin.">
+<link rel="icon" href="logo.png">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: warm paper page, one idea per band, rounded cards; PromoConnect blue is the only accent, yellow marks creators */
+:root{--bg:#f6f3ee;--bg2:#ece7df;--ink:#121212;--muted:#5f5b55;--line:rgba(18,18,18,.12);--card:#fffdf9;--field:#ffffff;--acc:#1F55F0;--acc-ink:#fff;--soft:rgba(31,85,240,.10);--sun:#F5B638;--sun-soft:rgba(245,182,56,.18);--good:#1a7a50;--good-soft:rgba(26,122,80,.12);--warn:#9a6400;--warn-soft:rgba(245,182,56,.2);--err:#C2362B;--shadow:0 30px 60px -28px rgba(20,25,60,.28);
+  --display:Geist,system-ui,-apple-system,"Segoe UI",sans-serif;--serif:"Instrument Serif",Georgia,serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0c0c0d;--bg2:#141416;--ink:#f3efe8;--muted:#a19c94;--line:rgba(243,239,232,.14);--card:#18181b;--field:#111113;--acc:#5C84FF;--acc-ink:#0a0f24;--soft:rgba(92,132,255,.16);--sun-soft:rgba(245,182,56,.16);--good:#4cc38a;--good-soft:rgba(76,195,138,.14);--warn:#F5B638;--warn-soft:rgba(245,182,56,.14);--err:#FF7A6E;--shadow:0 30px 60px -28px rgba(0,0,0,.7)}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0c0c0d;--bg2:#141416;--ink:#f3efe8;--muted:#a19c94;--line:rgba(243,239,232,.14);--card:#18181b;--field:#111113;--acc:#5C84FF;--acc-ink:#0a0f24;--soft:rgba(92,132,255,.16);--sun-soft:rgba(245,182,56,.16);--good:#4cc38a;--good-soft:rgba(76,195,138,.14);--warn:#F5B638;--warn-soft:rgba(245,182,56,.14);--err:#FF7A6E;--shadow:0 30px 60px -28px rgba(0,0,0,.7)}
+*,*::before,*::after{box-sizing:border-box}
+html,body{max-width:100%;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 var(--display);-webkit-font-smoothing:antialiased;touch-action:pan-y pinch-zoom;overscroll-behavior-x:none}
+a{color:var(--acc)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+[hidden]{display:none!important}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-weight:600;letter-spacing:-.035em;line-height:1.05;margin:0;text-wrap:balance}
+.serif{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-.01em;color:var(--acc)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 8px;background:var(--card)}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px var(--soft)}
+.hero{padding-block:clamp(44px,7vw,84px) clamp(28px,4vw,44px)}
+.hero h1{font-size:clamp(40px,6.6vw,80px);margin-top:18px;max-width:16ch}
+.hero p.lead{color:var(--muted);font-size:clamp(17px,1.7vw,20px);max-width:52ch;margin:18px 0 0}
+.band{padding-block:clamp(36px,6vw,72px)}
+.band h2{font-size:clamp(28px,4vw,46px)}
+.band .sub{color:var(--muted);max-width:56ch;margin:12px 0 0}
+.btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;padding:14px 22px;font-weight:600;font-size:16px;text-decoration:none;cursor:pointer}
+.btn.acc{background:var(--acc);color:var(--acc-ink);box-shadow:0 12px 30px -12px var(--acc)}
+.btn.dark{background:var(--ink);color:var(--bg)}
+.btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn[disabled]{opacity:.6;cursor:progress}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:clamp(20px,3vw,28px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.grid>*{min-width:0}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 11px;border-radius:999px;background:var(--soft);color:var(--ink);white-space:nowrap}
+.note{font-size:13px;color:var(--muted)}
+.final{background:var(--ink);color:var(--bg);border-radius:clamp(26px,4vw,40px);padding:clamp(36px,6vw,72px) clamp(22px,5vw,64px);margin-block:clamp(36px,6vw,72px)}
+.final h2{font-size:clamp(32px,5vw,60px);max-width:14ch}
+.final .serif{color:#8FAEFF}
+.final p{color:color-mix(in srgb,var(--bg) 70%,transparent);max-width:44ch;margin:14px 0 0}
+.final .btn.line{color:var(--bg);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--bg) 30%,transparent)}
+footer{border-top:1px solid var(--line);padding:28px 0 44px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 18px}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--ink)}
+/* one gentle entrance when the page opens; nothing keeps moving */
+.rise{animation:rise .7s cubic-bezier(.2,.8,.2,1) both}
+.rise.d1{animation-delay:.08s}.rise.d2{animation-delay:.16s}.rise.d3{animation-delay:.24s}.rise.d4{animation-delay:.32s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.rise{animation:none}html{scroll-behavior:auto}}
+/* explainer video in a phone frame */
+.vphone{width:min(100%,300px);aspect-ratio:9/16;border-radius:38px;background:#0d0d0f;padding:9px;box-shadow:var(--shadow),inset 0 0 0 2px #2a2a2e;margin-inline:auto}
+.vphone video{display:block;width:100%;height:100%;border-radius:30px;object-fit:cover;background:#0b0d1c}
+
+/* shared menu */
+.pn{position:sticky;top:0;z-index:40;padding-top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line)}
+.pn-in{max-width:1200px;margin:0 auto;padding:0 20px;height:64px;display:flex;align-items:center;gap:10px}
+.pn-logo{display:flex;align-items:center;gap:9px;margin-right:auto;font-weight:700;font-size:19px;letter-spacing:-.04em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.pn-logo img{width:30px;height:30px;border-radius:9px}
+.pn-links{display:flex;gap:2px}
+.pn-links a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:500;padding:8px 12px;border-radius:999px;white-space:nowrap}
+.pn-links a:hover{color:var(--ink)}
+.pn-links a[aria-current]{color:var(--ink);background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.pn-dash,.pn-join{font-size:14px;font-weight:600;text-decoration:none;border-radius:999px;padding:10px 16px;white-space:nowrap}
+.pn-dash{color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.pn-join{background:var(--ink);color:var(--bg)}
+.pn-menu{display:none;width:42px;height:42px;border-radius:50%;border:0;box-shadow:inset 0 0 0 1.5px var(--line);background:transparent;color:var(--ink);cursor:pointer;place-items:center;padding:0}
+.pn-menu span{display:block;width:16px;height:2px;border-radius:2px;background:currentColor;margin:2.5px auto;transition:transform .25s}
+.pn-menu[aria-expanded="true"] span:first-child{transform:translateY(3.5px) rotate(45deg)}
+.pn-menu[aria-expanded="true"] span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+.pn-panel{max-width:1200px;margin:0 auto;padding:6px 20px 18px;display:grid}
+.pn-panel[hidden]{display:none}
+.pn-panel a{padding:14px 4px;font-size:17px;font-weight:500;color:var(--ink);text-decoration:none;border-top:1px solid var(--line);display:flex;justify-content:space-between}
+.pn-panel a::after{content:"›";color:var(--muted)}
+@media (max-width:1060px){.pn-links,.pn-dash{display:none}.pn-menu{display:grid}}
+@media (min-width:1061px){.pn-panel{display:none!important}}
+
+.gate{max-width:520px;margin:clamp(28px,6vw,64px) auto}
+.gate h1{font-size:clamp(34px,5vw,52px)}
+.gate p.lead{color:var(--muted);margin:12px 0 22px}
+.f{display:grid;gap:7px;margin-bottom:14px}
+.f label{font-size:14px;font-weight:600}
+.f input,.inp{background:var(--field);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;width:100%;font-size:16px}
+.f input:focus,.inp:focus{border-color:var(--acc);outline:none;box-shadow:0 0 0 4px var(--soft)}
+#code{letter-spacing:.3em;text-align:center;font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.msg{font-size:14px;min-height:20px;margin:10px 0 0}.msg.err{color:var(--err)}.msg.ok{color:var(--good)}
+.linkbtn{background:none;border:0;padding:0;color:var(--acc);text-decoration:underline;cursor:pointer;font-size:15px}
+.adm{padding-block:clamp(24px,4vw,44px)}
+.sample{border-radius:16px;padding:12px 16px;background:var(--warn-soft);font-size:15px;margin-bottom:18px}
+.ah{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.ah h1{font-size:clamp(30px,4.4vw,46px)}
+.ah .acts{display:flex;flex-wrap:wrap;gap:8px}
+.btn.sm{padding:9px 14px;font-size:14px}
+.tiles{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));margin-top:20px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;min-width:0}
+.tile .k{font-size:13px;color:var(--muted)}
+.tile .v{font-size:34px;font-weight:600;letter-spacing:-.04em;line-height:1.1;font-variant-numeric:tabular-nums}
+.bar2{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0 14px}
+.seg{display:inline-flex;background:var(--bg2);border-radius:999px;padding:4px;gap:2px;flex-wrap:wrap}
+.seg button{border:0;background:transparent;border-radius:999px;padding:9px 14px;font-weight:600;font-size:14px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.bar2 .inp{flex:1;min-width:200px;border-radius:999px}
+.list{display:grid;gap:12px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px}
+.item .top{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.item .av{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:18px;color:#fff;background:#B4537A;flex:none}
+.item .who{min-width:0;flex:1}
+.item .nm{font-weight:600;font-size:18px;letter-spacing:-.02em;overflow-wrap:anywhere}
+.item .mt{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;border-radius:999px;padding:5px 11px;white-space:nowrap}
+.st.verified{background:var(--good-soft);color:var(--good)}.st.pending{background:var(--warn-soft);color:var(--warn)}.st.paused{background:var(--bg2);color:var(--muted)}
+.facts{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;font-size:14px;color:var(--muted)}
+.facts a{overflow-wrap:anywhere}
+.facts b{color:var(--ink);font-weight:600}
+.quick{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.edit{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr));margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.edit label{display:grid;gap:5px;font-size:12px;font-weight:600;color:var(--muted)}
+.edit .wide{grid-column:1/-1}
+.edit .inp{padding:10px 12px;font-size:15px;font-variant-numeric:tabular-nums}
+.item .foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:12px}
+.pts{font-size:14px;color:var(--muted)}.pts b{color:var(--ink);font-size:18px;font-variant-numeric:tabular-nums}
+.empty{padding:36px 16px;text-align:center;color:var(--muted);background:var(--card);border:1px dashed var(--line);border-radius:22px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);border-radius:999px;padding:11px 18px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:60;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<header class="pn" id="nav"><div class="pn-in">
+  <a class="pn-logo" href="index.html"><img src="logo.png" alt="">PromoConnect</a>
+  <nav class="pn-links" aria-label="Main"><a href="index.html#how">How it works</a><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="pricing.html">Pricing</a><a href="help.html">Help</a><a href="https://instagram.com/promoconnect.in">Instagram</a></nav>
+  <a class="pn-dash" href="dashboard.html">My dashboard</a>
+  <a class="pn-join" href="join.html">Join free</a>
+  <button class="pn-menu" type="button" aria-expanded="false" aria-controls="pnPanel" aria-label="Menu"><span></span><span></span></button>
+</div><nav class="pn-panel" id="pnPanel" aria-label="Menu" hidden><a href="index.html#how">How it works</a><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="pricing.html">Pricing</a><a href="help.html">Help</a><a href="https://instagram.com/promoconnect.in">Instagram</a><a href="dashboard.html">My dashboard</a><a href="contact.html">Contact</a></nav></header>
+<main>
+
+<div class="wrap">
+  <section class="gate card rise" id="gate">
+    <span class="eyebrow"><i></i>Owner only</span>
+    <h1 style="margin-top:16px">Owner <span class="serif">admin.</span></h1>
+    <p class="lead" id="gateLead">Sign in with the PromoConnect owner email. We send an 8-digit code to that inbox. Nobody else can get in.</p>
+    <form id="emailForm" novalidate>
+      <div class="f"><label for="email">Owner email</label><input id="email" type="email" autocomplete="email" inputmode="email" required></div>
+      <button class="btn acc" type="submit" id="sendBtn">Email me the owner code →</button>
+    </form>
+    <form id="codeForm" novalidate hidden>
+      <div class="f"><label for="code">8-digit code from your email</label><input id="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="9" placeholder="00000000" required></div>
+      <button class="btn acc" type="submit" id="codeBtn">Open admin →</button>
+      <p style="margin:14px 0 0"><button class="linkbtn" type="button" id="back">Start again</button></p>
+    </form>
+    <p class="msg" id="msg" role="status"></p>
+    <p style="margin:18px 0 0"><button class="linkbtn" type="button" id="sampleBtn">See a sample with example data</button></p>
+  </section>
+
+  <section class="adm" id="adm" hidden>
+    <div class="sample" id="sampleBar" hidden><b>Sample.</b> Example data only. Changes here are not saved.</div>
+    <div class="ah"><h1>Owner <span class="serif">admin.</span></h1>
+      <div class="acts"><button class="btn line sm" type="button" id="refresh">Refresh</button><a class="btn line sm" id="sheetLink" href="#" target="_blank" rel="noopener">Open Google Sheet</a><button class="btn dark sm" type="button" id="signOut">Sign out</button></div></div>
+    <div class="tiles">
+      <div class="tile"><div class="k">Creators</div><div class="v" id="nC">0</div></div>
+      <div class="tile"><div class="k">Waiting for review</div><div class="v" id="nP">0</div></div>
+      <div class="tile"><div class="k">Verified</div><div class="v" id="nV">0</div></div>
+      <div class="tile"><div class="k">Brands</div><div class="v" id="nB">0</div></div>
+      <div class="tile"><div class="k">Collabs completed</div><div class="v" id="nK">0</div></div>
+    </div>
+    <div class="bar2">
+      <div class="seg" role="group" aria-label="Show" id="seg"><button type="button" data-v="pending" aria-pressed="true">To review</button><button type="button" data-v="creators" aria-pressed="false">All creators</button><button type="button" data-v="brands" aria-pressed="false">Brands</button></div>
+      <input class="inp" id="q" type="search" placeholder="Search name, handle, city or email" aria-label="Search">
+    </div>
+    <div class="list" id="list" aria-live="polite"></div>
+  </section>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+</main>
+<footer><div class="wrap">
+  <span>© 2026 PromoConnect · Made in India · promoconnect.in@gmail.com · <a href="https://instagram.com/promoconnect.in" target="_blank" rel="noopener">Instagram @promoconnect.in</a></span>
+  <nav><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="dashboard.html">My dashboard</a><a href="help.html">Help</a><a href="pricing.html">Pricing</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="refund.html">Refunds</a><a href="contact.html">Contact</a></nav>
+</div></footer>
+<script>(function(){var b=document.querySelector('.pn-menu'),p=document.getElementById('pnPanel');if(!b||!p)return;
+b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));p.hidden=o;});
+p.addEventListener('click',function(e){if(e.target.closest('a')){b.setAttribute('aria-expanded','false');p.hidden=true;}});})();</script>
+<script>
+(function(){
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyYXvMHUr0huQLzTiupv0fo-H-aEklPTzNxd1v0Oq5pc_h9wiHvZJzfoxpsz7Gy4agq/exec';
+
+var BADGES = {
+  verified: { name: 'Verified', how: 'Profile checked by PromoConnect', icon: '<path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>' },
+  founding: { name: 'Founding creator', how: 'One of the first 100 creators to join', icon: '<path d="M5 21V4M5 4h12l-2 4 2 4H5"/>' },
+  first:    { name: 'First collab', how: 'Completed 1 collaboration', icon: '<path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/>' },
+  five:     { name: 'Rising creator', how: 'Completed 5 collaborations', icon: '<path d="M4 20V11M10 20V4M16 20v-7M22 20H2"/>' },
+  ten:      { name: 'Pro creator', how: 'Completed 10 collaborations', icon: '<path d="M4 18h16l1-10-5 4-4-7-4 7-5-4z"/>' },
+  ontime:   { name: 'Always on time', how: '3 or more collabs, every post on time', icon: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>' }
+};
+function svg(d, s){ return '<svg width="' + (s||18) + '" height="' + (s||18) + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>'; }
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function inr(n){ return '₹' + Number(n || 0).toLocaleString('en-IN'); }
+
+  var $ = function(id){ return document.getElementById(id); };
+  var live = /^https:\/\/script\.google\.com\//.test(ENDPOINT), email = '', token = '', sample = false, data = { creators: [], brands: [], sheet: '#' }, view = 'pending';
+  var SAMPLE = { sheet: '#', creators: [
+    { row: 2, date: '2026-10-01T10:00:00Z', name: 'Aisha Khan', email: 'aisha@example.com', handle: '@aisha.skin.diaries', followers: '5K–10K', topics: 'Skincare, Lifestyle', city: 'Pune', whatsapp: '98xxxxxx10', post: 'https://instagram.com/', before: 'Yes', board: true, status: 'Verified', collabs: 4, products: 4, value: 5200, ontime: 4, note: 'Two skincare brands are reviewing your profile.', points: 600 },
+    { row: 3, date: '2026-10-02T08:30:00Z', name: 'Rohan Mehta', email: 'rohan@example.com', handle: '@rohan.fits', followers: '10K–50K', topics: 'Fitness', city: 'Delhi', whatsapp: '', post: 'https://instagram.com/', before: 'No', board: false, status: 'Pending', collabs: 0, products: 0, value: 0, ontime: 0, note: '', points: 0 },
+    { row: 4, date: '2026-10-02T09:10:00Z', name: 'Meera Joshi', email: 'meera@example.com', handle: '@meera.eats', followers: '1K–5K', topics: 'Food', city: 'Jaipur', whatsapp: '97xxxxxx22', post: 'https://instagram.com/', before: 'No', board: true, status: 'Pending', collabs: 0, products: 0, value: 0, ontime: 0, note: '', points: 0 } ],
+    brands: [ { row: 2, date: '2026-10-02T07:00:00Z', name: 'Riya Shah', email: 'riya@example.com', brand: 'Glow & Grain', handle: '@glowandgrain', website: 'https://example.com', category: 'Skincare', product: 'Vitamin C serum, ₹1,200', creators: '6-20', before: 'No', problem: 'Creators take the product and never post.', whatsapp: '99xxxxxx01' } ] };
+  var ERR = { not_owner: 'That is not the owner email for this site.', too_many: 'Too many tries. Please wait and try again later.', bad_code: 'That code is not right. Check the newest email and try again.',
+    expired: 'You were signed out. Please sign in again.', moved: 'The sheet changed. Refreshing the list.', offline: 'Could not connect. Check your internet connection and try again.', soon: 'The owner page is not switched on yet. Update the Google script first.' };
+  function store(v){ try { if (v == null) sessionStorage.removeItem('pc_admin'); else sessionStorage.setItem('pc_admin', v); } catch (e) {} }
+  function saved(){ try { return JSON.parse(sessionStorage.getItem('pc_admin') || 'null'); } catch (e) { return null; } }
+  function say(t, k){ var m = $('msg'); m.textContent = t || ''; m.className = 'msg ' + (k || ''); }
+  var tt; function toast(t){ var el = $('toast'); el.textContent = t; el.classList.add('on'); clearTimeout(tt); tt = setTimeout(function(){ el.classList.remove('on'); }, 2200); }
+  function call(params){
+    if (!live) return Promise.reject({ error: 'soon' });
+    return fetch(ENDPOINT, { method: 'POST', body: new URLSearchParams(params) }).then(function(r){ return r.json(); })
+      .then(function(d){ if (!d || d.v === undefined || (d.ok && !d.data && params.action !== 'admin_code')) throw { error: 'soon' }; if (!d.ok) throw { error: d.error || 'soon' }; return d; },
+            function(e){ throw (e && e.error) ? e : { error: 'offline' }; });
+  }
+  function busy(b, on, text){ b.disabled = on; if (on) { b.dataset.t = b.innerHTML; b.textContent = text; } else if (b.dataset.t) b.innerHTML = b.dataset.t; }
+
+  $('emailForm').addEventListener('submit', function(e){ e.preventDefault(); say('');
+    email = $('email').value.trim().toLowerCase(); if (!email) { $('email').focus(); return; }
+    var b = $('sendBtn'); busy(b, true, 'Sending…');
+    call({ action: 'admin_code', email: email }).then(function(){ $('emailForm').hidden = true; $('codeForm').hidden = false; $('gateLead').textContent = 'We sent an 8-digit code to the owner inbox. It works for 10 minutes.'; $('code').focus(); })
+      .catch(function(er){ say(ERR[er.error] || ERR.soon, 'err'); }).then(function(){ busy(b, false); });
+  });
+  $('codeForm').addEventListener('submit', function(e){ e.preventDefault(); say('');
+    var code = $('code').value.replace(/\D/g, ''); if (code.length !== 8) { say('Please enter the 8-digit code.', 'err'); return; }
+    var b = $('codeBtn'); busy(b, true, 'Checking…');
+    call({ action: 'admin_login', email: email, code: code }).then(function(d){ token = d.token; store(JSON.stringify({ t: token, e: email })); open(d.data, false); })
+      .catch(function(er){ say(ERR[er.error] || ERR.soon, 'err'); }).then(function(){ busy(b, false); });
+  });
+  $('back').addEventListener('click', out);
+  $('sampleBtn').addEventListener('click', function(){ open(JSON.parse(JSON.stringify(SAMPLE)), true); });
+  $('signOut').addEventListener('click', out);
+  $('refresh').addEventListener('click', function(){ if (sample) { toast('Sample data'); return; } load(true); });
+  function out(){ token = ''; store(null); sample = false; $('adm').hidden = true; $('gate').hidden = false; $('codeForm').hidden = true; $('emailForm').hidden = false; $('code').value = ''; say(''); window.scrollTo(0, 0); }
+  function load(tell){ return call({ action: 'admin_list', token: token }).then(function(d){ data = d.data; render(); if (tell) toast('Up to date'); }).catch(fail); }
+  function fail(er){ if (er.error === 'expired') { out(); say(ERR.expired, 'err'); } else if (er.error === 'moved') { toast(ERR.moved); load(); } else toast(ERR[er.error] || ERR.offline); }
+  function open(d, isSample){ sample = isSample; data = d; $('gate').hidden = true; $('adm').hidden = false; $('sampleBar').hidden = !isSample; render(); window.scrollTo(0, 0); }
+
+  function key(s){ s = String(s || '').toLowerCase(); return s === 'verified' ? 'verified' : s === 'paused' ? 'paused' : 'pending'; }
+  function when(d){ var t = new Date(d); return isNaN(t) ? '' : t.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }); }
+  function link(u, text){ return /^https?:\/\//i.test(u) ? '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(text || u) + '</a>' : esc(u); }
+  function ig(h){ var u = String(h).replace(/^@/, ''); return /^[\w.]+$/.test(u) ? '<a href="https://instagram.com/' + u + '" target="_blank" rel="noopener">' + esc(h) + '</a>' : esc(h); }
+
+  function creatorCard(c){
+    var k = key(c.status), label = { verified: 'Verified', pending: 'To review', paused: 'Paused' }[k];
+    return '<div class="item" data-row="' + c.row + '"><div class="top"><div class="av">' + esc((String(c.handle).replace(/^@/, '')[0] || '?').toUpperCase()) + '</div>' +
+      '<div class="who"><div class="nm">' + esc(c.name) + '</div><div class="mt">' + ig(c.handle) + ' · ' + esc(c.city) + ' · ' + esc(c.followers) + ' followers · joined ' + when(c.date) + '</div></div>' +
+      '<span class="st ' + k + '">' + label + '</span></div>' +
+      '<div class="facts"><span><b>Topics</b> ' + esc(c.topics) + '</span><span><b>Email</b> ' + esc(c.email) + '</span>' + (c.whatsapp ? '<span><b>WhatsApp</b> ' + esc(c.whatsapp) + '</span>' : '') +
+      '<span><b>Best post</b> ' + link(c.post, 'Open') + '</span><span><b>Collabs before</b> ' + esc(c.before) + '</span><span><b>Top 10</b> ' + (c.board ? 'Wants to be shown' : 'Hidden') + '</span></div>' +
+      '<div class="quick">' + (k !== 'verified' ? '<button class="btn acc sm" data-a="verify" type="button">✓ Verify</button>' : '') +
+      (k === 'verified' ? '<button class="btn dark sm" data-a="ontime" type="button">+1 collab, on time</button><button class="btn line sm" data-a="late" type="button">+1 collab, late</button>' : '') +
+      (k !== 'paused' ? '<button class="btn line sm" data-a="pause" type="button">Pause</button>' : '<button class="btn line sm" data-a="verify" type="button">Resume</button>') + '</div>' +
+      '<div class="edit"><label>Collabs done<input class="inp" data-f="collabs" type="number" min="0" inputmode="numeric" value="' + c.collabs + '"></label>' +
+      '<label>On-time posts<input class="inp" data-f="ontime" type="number" min="0" inputmode="numeric" value="' + c.ontime + '"></label>' +
+      '<label>Products received<input class="inp" data-f="products" type="number" min="0" inputmode="numeric" value="' + c.products + '"></label>' +
+      '<label>Product value (₹)<input class="inp" data-f="value" type="number" min="0" inputmode="numeric" value="' + c.value + '"></label>' +
+      '<label class="wide">Note the creator sees on their dashboard<input class="inp" data-f="note" type="text" maxlength="300" value="' + esc(c.note) + '"></label></div>' +
+      '<div class="foot"><span class="pts"><b>' + Number(c.points).toLocaleString('en-IN') + '</b> points</span><button class="btn line sm" data-a="save" type="button">Save changes</button></div></div>';
+  }
+  function brandCard(b){
+    return '<div class="item"><div class="top"><div class="av" style="background:#1F55F0">' + esc((b.brand[0] || '?').toUpperCase()) + '</div><div class="who"><div class="nm">' + esc(b.brand) + '</div><div class="mt">' + ig(b.handle) + ' · ' + esc(b.category) + ' · signed up ' + when(b.date) + '</div></div></div>' +
+      '<div class="facts"><span><b>Contact</b> ' + esc(b.name) + '</span><span><b>Email</b> ' + esc(b.email) + '</span><span><b>WhatsApp</b> ' + esc(b.whatsapp) + '</span>' + (b.website ? '<span><b>Website</b> ' + link(b.website, 'Open') + '</span>' : '') +
+      '<span><b>Product</b> ' + esc(b.product) + '</span><span><b>Creators wanted</b> ' + esc(b.creators) + '</span><span><b>Worked with creators</b> ' + esc(b.before) + '</span>' + (b.problem ? '<span><b>Biggest problem</b> ' + esc(b.problem) + '</span>' : '') + '</div></div>';
+  }
+  function render(){
+    var cs = data.creators || [], bs = data.brands || [], q = $('q').value.trim().toLowerCase();
+    $('nC').textContent = cs.length; $('nP').textContent = cs.filter(function(c){ return key(c.status) === 'pending'; }).length;
+    $('nV').textContent = cs.filter(function(c){ return key(c.status) === 'verified'; }).length; $('nB').textContent = bs.length;
+    $('nK').textContent = cs.reduce(function(n, c){ return n + c.collabs; }, 0);
+    $('sheetLink').href = data.sheet || '#';
+    var hit = function(o){ return !q || JSON.stringify(o).toLowerCase().indexOf(q) !== -1; }, html = '';
+    if (view === 'brands') html = bs.filter(hit).slice().reverse().map(brandCard).join('') || '<div class="empty">No brands yet. They appear here as soon as one signs up.</div>';
+    else { var list = cs.filter(hit).filter(function(c){ return view === 'creators' || key(c.status) === 'pending'; });
+      list = view === 'creators' ? list.slice().sort(function(a, b){ return b.points - a.points || b.row - a.row; }) : list.slice().reverse();
+      html = list.map(creatorCard).join('') || '<div class="empty">' + (view === 'pending' ? 'Nobody is waiting for review. New creators appear here.' : 'No creators yet.') + '</div>'; }
+    $('list').innerHTML = html;
+  }
+  [].forEach.call(document.querySelectorAll('#seg button'), function(b){ b.addEventListener('click', function(){ view = b.dataset.v; [].forEach.call(document.querySelectorAll('#seg button'), function(x){ x.setAttribute('aria-pressed', String(x === b)); }); render(); }); });
+  $('q').addEventListener('input', render);
+
+  $('list').addEventListener('click', function(e){
+    var btn = e.target.closest('button[data-a]'); if (!btn) return;
+    var card = btn.closest('.item'), row = Number(card.dataset.row), c = data.creators.filter(function(x){ return x.row === row; })[0]; if (!c) return;
+    var val = function(f){ return card.querySelector('[data-f="' + f + '"]').value; }, n = function(f){ return Math.max(0, Math.floor(Number(val(f)) || 0)); };
+    var ch = { collabs: n('collabs'), ontime: n('ontime'), products: n('products'), value: n('value'), note: val('note').trim() }, a = btn.dataset.a, done = 'Saved';
+    if (a === 'verify') { ch.status = 'Verified'; done = c.name.split(' ')[0] + ' is verified'; }
+    if (a === 'pause') { ch.status = 'Paused'; done = 'Paused'; }
+    if (a === 'ontime') { ch.collabs++; ch.ontime++; ch.products++; done = '+150 points'; }
+    if (a === 'late') { ch.collabs++; ch.products++; done = '+100 points'; }
+    ch.ontime = Math.min(ch.ontime, ch.collabs);
+    if (sample) { Object.assign(c, ch); c.points = c.collabs * 100 + c.ontime * 50; render(); toast(done + ' (sample)'); return; }
+    busy(btn, true, 'Saving…');
+    call(Object.assign({ action: 'admin_update', token: token, row: row, email: c.email }, ch)).then(function(d){ data = d.data; render(); toast(done); }).catch(function(er){ busy(btn, false); fail(er); });
+  });
+  $('code').addEventListener('input', function(){ this.value = this.value.replace(/[^\d ]/g, ''); });
+  var s = saved(); if (s && s.t && live) { token = s.t; email = s.e; call({ action: 'admin_list', token: token }).then(function(d){ open(d.data, false); }).catch(function(){ store(null); token = ''; }); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Help centre | PromoConnect</title>
+<meta name="description" content="Answers for creators and brands on PromoConnect: joining, products, payments, points and the Top 10.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: warm paper page, one idea per band, rounded cards; PromoConnect blue is the only accent, yellow marks creators */
+:root{--bg:#f6f3ee;--bg2:#ece7df;--ink:#121212;--muted:#5f5b55;--line:rgba(18,18,18,.12);--card:#fffdf9;--field:#ffffff;--acc:#1F55F0;--acc-ink:#fff;--soft:rgba(31,85,240,.10);--sun:#F5B638;--sun-soft:rgba(245,182,56,.18);--good:#1a7a50;--good-soft:rgba(26,122,80,.12);--warn:#9a6400;--warn-soft:rgba(245,182,56,.2);--err:#C2362B;--shadow:0 30px 60px -28px rgba(20,25,60,.28);
+  --display:Geist,system-ui,-apple-system,"Segoe UI",sans-serif;--serif:"Instrument Serif",Georgia,serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0c0c0d;--bg2:#141416;--ink:#f3efe8;--muted:#a19c94;--line:rgba(243,239,232,.14);--card:#18181b;--field:#111113;--acc:#5C84FF;--acc-ink:#0a0f24;--soft:rgba(92,132,255,.16);--sun-soft:rgba(245,182,56,.16);--good:#4cc38a;--good-soft:rgba(76,195,138,.14);--warn:#F5B638;--warn-soft:rgba(245,182,56,.14);--err:#FF7A6E;--shadow:0 30px 60px -28px rgba(0,0,0,.7)}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0c0c0d;--bg2:#141416;--ink:#f3efe8;--muted:#a19c94;--line:rgba(243,239,232,.14);--card:#18181b;--field:#111113;--acc:#5C84FF;--acc-ink:#0a0f24;--soft:rgba(92,132,255,.16);--sun-soft:rgba(245,182,56,.16);--good:#4cc38a;--good-soft:rgba(76,195,138,.14);--warn:#F5B638;--warn-soft:rgba(245,182,56,.14);--err:#FF7A6E;--shadow:0 30px 60px -28px rgba(0,0,0,.7)}
+*,*::before,*::after{box-sizing:border-box}
+html,body{max-width:100%;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 var(--display);-webkit-font-smoothing:antialiased;touch-action:pan-y pinch-zoom;overscroll-behavior-x:none}
+a{color:var(--acc)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+[hidden]{display:none!important}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-weight:600;letter-spacing:-.035em;line-height:1.05;margin:0;text-wrap:balance}
+.serif{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-.01em;color:var(--acc)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 8px;background:var(--card)}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px var(--soft)}
+.hero{padding-block:clamp(44px,7vw,84px) clamp(28px,4vw,44px)}
+.hero h1{font-size:clamp(40px,6.6vw,80px);margin-top:18px;max-width:16ch}
+.hero p.lead{color:var(--muted);font-size:clamp(17px,1.7vw,20px);max-width:52ch;margin:18px 0 0}
+.band{padding-block:clamp(36px,6vw,72px)}
+.band h2{font-size:clamp(28px,4vw,46px)}
+.band .sub{color:var(--muted);max-width:56ch;margin:12px 0 0}
+.btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;padding:14px 22px;font-weight:600;font-size:16px;text-decoration:none;cursor:pointer}
+.btn.acc{background:var(--acc);color:var(--acc-ink);box-shadow:0 12px 30px -12px var(--acc)}
+.btn.dark{background:var(--ink);color:var(--bg)}
+.btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn[disabled]{opacity:.6;cursor:progress}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:clamp(20px,3vw,28px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.grid>*{min-width:0}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 11px;border-radius:999px;background:var(--soft);color:var(--ink);white-space:nowrap}
+.note{font-size:13px;color:var(--muted)}
+.final{background:var(--ink);color:var(--bg);border-radius:clamp(26px,4vw,40px);padding:clamp(36px,6vw,72px) clamp(22px,5vw,64px);margin-block:clamp(36px,6vw,72px)}
+.final h2{font-size:clamp(32px,5vw,60px);max-width:14ch}
+.final .serif{color:#8FAEFF}
+.final p{color:color-mix(in srgb,var(--bg) 70%,transparent);max-width:44ch;margin:14px 0 0}
+.final .btn.line{color:var(--bg);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--bg) 30%,transparent)}
+footer{border-top:1px solid var(--line);padding:28px 0 44px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 18px}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--ink)}
+/* one gentle entrance when the page opens; nothing keeps moving */
+.rise{animation:rise .7s cubic-bezier(.2,.8,.2,1) both}
+.rise.d1{animation-delay:.08s}.rise.d2{animation-delay:.16s}.rise.d3{animation-delay:.24s}.rise.d4{animation-delay:.32s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.rise{animation:none}html{scroll-behavior:auto}}
+/* explainer video in a phone frame */
+.vphone{width:min(100%,300px);aspect-ratio:9/16;border-radius:38px;background:#0d0d0f;padding:9px;box-shadow:var(--shadow),inset 0 0 0 2px #2a2a2e;margin-inline:auto}
+.vphone video{display:block;width:100%;height:100%;border-radius:30px;object-fit:cover;background:#0b0d1c}
+
+/* shared menu */
+.pn{position:sticky;top:0;z-index:40;padding-top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line)}
+.pn-in{max-width:1200px;margin:0 auto;padding:0 20px;height:64px;display:flex;align-items:center;gap:10px}
+.pn-logo{display:flex;align-items:center;gap:9px;margin-right:auto;font-weight:700;font-size:19px;letter-spacing:-.04em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.pn-logo img{width:30px;height:30px;border-radius:9px}
+.pn-links{display:flex;gap:2px}
+.pn-links a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:500;padding:8px 12px;border-radius:999px;white-space:nowrap}
+.pn-links a:hover{color:var(--ink)}
+.pn-links a[aria-current]{color:var(--ink);background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.pn-dash,.pn-join{font-size:14px;font-weight:600;text-decoration:none;border-radius:999px;padding:10px 16px;white-space:nowrap}
+.pn-dash{color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.pn-join{background:var(--ink);color:var(--bg)}
+.pn-menu{display:none;width:42px;height:42px;border-radius:50%;border:0;box-shadow:inset 0 0 0 1.5px var(--line);background:transparent;color:var(--ink);cursor:pointer;place-items:center;padding:0}
+.pn-menu span{display:block;width:16px;height:2px;border-radius:2px;background:currentColor;margin:2.5px auto;transition:transform .25s}
+.pn-menu[aria-expanded="true"] span:first-child{transform:translateY(3.5px) rotate(45deg)}
+.pn-menu[aria-expanded="true"] span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+.pn-panel{max-width:1200px;margin:0 auto;padding:6px 20px 18px;display:grid}
+.pn-panel[hidden]{display:none}
+.pn-panel a{padding:14px 4px;font-size:17px;font-weight:500;color:var(--ink);text-decoration:none;border-top:1px solid var(--line);display:flex;justify-content:space-between}
+.pn-panel a::after{content:"›";color:var(--muted)}
+@media (max-width:1060px){.pn-links,.pn-dash{display:none}.pn-menu{display:grid}}
+@media (min-width:1061px){.pn-panel{display:none!important}}
+
+.help-top{display:grid;gap:clamp(24px,5vw,56px);grid-template-columns:1fr;align-items:center}
+@media (min-width:900px){.help-top{grid-template-columns:1.2fr .8fr}}
+.help-top>*{min-width:0}
+.search{display:flex;align-items:center;gap:12px;background:var(--field);border:1.5px solid var(--line);border-radius:999px;padding:6px 8px 6px 18px;margin-top:28px;max-width:560px;color:var(--muted)}
+.search:focus-within{border-color:var(--acc);box-shadow:0 0 0 4px var(--soft)}
+.search input{flex:1;min-width:0;border:0;background:transparent;padding:10px 0;font-size:17px;color:var(--ink);outline:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 18px}
+.chips button{border:0;box-shadow:inset 0 0 0 1.5px var(--line);background:var(--card);border-radius:999px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg);box-shadow:none}
+.faq{max-width:860px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px 0;font-size:clamp(17px,2vw,20px);font-weight:600;letter-spacing:-.02em}
+.faq summary::-webkit-details-marker{display:none}
+.faq .pl{width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--line);position:relative;flex:none;transition:transform .3s,background .3s}
+.faq .pl::before,.faq .pl::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1.5px;background:currentColor;transform:translate(-50%,-50%)}
+.faq .pl::after{transform:translate(-50%,-50%) rotate(90deg)}
+.faq details[open] .pl{transform:rotate(45deg);background:var(--acc);box-shadow:none;color:var(--acc-ink)}
+.faq details p{margin:0 0 20px;color:var(--muted);max-width:62ch}
+.none{padding:26px 0;color:var(--muted)}
+.contact{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.contact .card{display:grid;gap:8px;align-content:start}
+.contact .ci{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--soft);color:var(--acc)}
+.contact h3{font-size:19px}
+.contact p{margin:0;color:var(--muted);font-size:15px}
+.copy{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:600;user-select:all}
+.copy button{border:0;background:var(--ink);color:var(--bg);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;user-select:none}
+</style>
+</head>
+<body>
+<header class="pn" id="nav"><div class="pn-in">
+  <a class="pn-logo" href="index.html"><img src="logo.png" alt="">PromoConnect</a>
+  <nav class="pn-links" aria-label="Main"><a href="index.html#how">How it works</a><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="pricing.html">Pricing</a><a href="help.html" aria-current="page">Help</a><a href="https://instagram.com/promoconnect.in">Instagram</a></nav>
+  <a class="pn-dash" href="dashboard.html">My dashboard</a>
+  <a class="pn-join" href="join.html">Join free</a>
+  <button class="pn-menu" type="button" aria-expanded="false" aria-controls="pnPanel" aria-label="Menu"><span></span><span></span></button>
+</div><nav class="pn-panel" id="pnPanel" aria-label="Menu" hidden><a href="index.html#how">How it works</a><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="pricing.html">Pricing</a><a href="help.html">Help</a><a href="https://instagram.com/promoconnect.in">Instagram</a><a href="dashboard.html">My dashboard</a><a href="contact.html">Contact</a></nav></header>
+<main>
+
+<div class="wrap hero">
+  <div class="help-top">
+    <div>
+      <span class="eyebrow rise"><i></i>Help centre</span>
+      <h1 class="rise d1">How can we <span class="serif">help?</span></h1>
+      <p class="lead rise d2">Quick answers for creators and brands. Search a question, or watch how PromoConnect works in 30 seconds.</p>
+      <label class="search rise d3" for="q"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" type="search" placeholder="Search, for example: refund, points, shipping" autocomplete="off"></label>
+    </div>
+    <div class="rise d2"><div class="vphone"><video controls playsinline preload="none" poster="video-poster.jpg" aria-label="PromoConnect explained in 30 seconds"><source src="promoconnect-explainer.mp4" type="video/mp4">Your browser cannot play this video.</video></div><p class="note" style="text-align:center;margin:10px 0 0">How PromoConnect works · 34 seconds, with sound</p></div>
+  </div>
+</div>
+
+<section class="band wrap" style="padding-top:0">
+  <h2>Common questions</h2>
+  <div class="chips" role="group" aria-label="Topic" id="chips"><button type="button" data-c="all" aria-pressed="true">All</button><button type="button" data-c="creators" aria-pressed="false">Creators</button><button type="button" data-c="brands" aria-pressed="false">Brands</button><button type="button" data-c="payments" aria-pressed="false">Payments</button><button type="button" data-c="safety" aria-pressed="false">Safety</button><button type="button" data-c="dashboard" aria-pressed="false">Dashboard & Top 10</button></div>
+  <div class="faq" id="faq"><details data-c="creators"><summary>Who can join as a creator?<span class="pl"></span></summary><p>Anyone aged 18 or older with a public Instagram account. Fill in the creator form and we review your profile, usually within 2 working days.</p></details><details data-c="creators"><summary>Do I need a lot of followers?<span class="pl"></span></summary><p>No. Brands often prefer smaller creators with an engaged, loyal audience. What matters most is that your content fits the product.</p></details><details data-c="creators"><summary>Does it cost anything to join?<span class="pl"></span></summary><p>No. Joining is free for creators, and you keep every product you review. The paid plans, Pro (₹399 a month) and Elite (₹999 a month), are optional and give more applications.</p></details><details data-c="creators"><summary>How do I get a product?<span class="pl"></span></summary><p>When a brand fits your profile, we message you with the product and what to post. If you say yes, the brand ships it to your door at no cost to you.</p></details><details data-c="creators"><summary>Do I have to give a positive review?<span class="pl"></span></summary><p>Never. Share your honest opinion. A free product does not buy a good review, and brands agree to this when they join.</p></details><details data-c="creators"><summary>How long do I have to post?<span class="pl"></span></summary><p>14 days from the day the product arrives, unless you and the brand agree on more time. The post should stay up for at least 30 days.</p></details><details data-c="creators"><summary>How should I label the post?<span class="pl"></span></summary><p>Add #gifted or #ad where people can see it, at the start of the caption or on the video itself. India's ASCI rules require this for free products too.</p></details><details data-c="brands"><summary>What does PromoConnect cost a brand?<span class="pl"></span></summary><p>Founding brands get their first collaborations free. After that, plans start at ₹999 a month. See the Pricing page for every plan.</p></details><details data-c="brands"><summary>How do I choose creators?<span class="pl"></span></summary><p>We send you creator profiles that match your product, with their followers, engagement, topics and city. You approve the ones you like, and only then ship.</p></details><details data-c="brands"><summary>Who ships the product?<span class="pl"></span></summary><p>The brand ships directly to the creator and shares the tracking number. PromoConnect does not sell or ship products.</p></details><details data-c="brands"><summary>What if a creator doesn't post?<span class="pl"></span></summary><p>We follow up first. If there is still no post 14 days after delivery, any cash paid for the deal is refunded, and the creator loses points and can be removed.</p></details><details data-c="brands"><summary>Can I reuse a creator's content?<span class="pl"></span></summary><p>You can reshare the post with credit. Using it in paid ads needs the creator's permission, which is included in the Elite plan.</p></details><details data-c="payments"><summary>How can I pay?<span class="pl"></span></summary><p>By UPI (Google Pay, PhonePe, Paytm, BHIM), card, netbanking or wallet through Razorpay. Brands outside India can pay with PayPal.</p></details><details data-c="payments"><summary>When do creators get paid for paid deals?<span class="pl"></span></summary><p>The brand's payment is held until the post is checked. It is then sent to the creator's bank account or UPI ID, minus the fee shown on the Pricing page.</p></details><details data-c="payments"><summary>Can I get a refund?<span class="pl"></span></summary><p>Yes, in the cases listed in our Refund and Cancellation Policy, such as a first plan payment within 7 days or a deal where no post was made.</p></details><details data-c="safety"><summary>How do you check creators and brands?<span class="pl"></span></summary><p>We look at a creator's real followers and engagement, and flag sudden follower spikes. Brands must have a real product page before their first listing.</p></details><details data-c="safety"><summary>How do I report a problem?<span class="pl"></span></summary><p>Email promoconnect.in@gmail.com with what happened. We acknowledge complaints within 48 hours and aim to resolve them within 30 days.</p></details><details data-c="safety"><summary>What do you do with my details?<span class="pl"></span></summary><p>We use them to match you and arrange collaborations. We never sell your data. A delivery address goes only to a brand you agreed to work with. See the Privacy Policy.</p></details><details data-c="dashboard"><summary>How do I open My dashboard?<span class="pl"></span></summary><p>Go to My dashboard, type the email you joined with, and we email you a 6-digit code. Enter the code and you are in. There is no password to remember.</p></details><details data-c="dashboard"><summary>How do points work?<span class="pl"></span></summary><p>You earn 100 points for every completed collaboration and 50 bonus points for every post made on time. We update points after each collaboration is checked.</p></details><details data-c="dashboard"><summary>How do I get on the Top 10?<span class="pl"></span></summary><p>Complete collaborations to earn points, and switch on 'Show me on the Top 10' in your dashboard. Only creators who switch it on are shown.</p></details><details data-c="dashboard"><summary>Can I hide myself from the Top 10?<span class="pl"></span></summary><p>Yes. Switch off 'Show me on the Top 10' in your dashboard and your name is removed straight away.</p></details></div>
+  <p class="none" id="none" hidden>No answer matches that yet. Try a shorter word, or email us and we will reply within 48 hours.</p>
+</section>
+
+<section class="band wrap" style="padding-top:0">
+  <h2>Still stuck?</h2>
+  <p class="sub">A real person reads every message. We reply within 48 hours, Monday to Saturday.</p>
+  <div class="contact" style="margin-top:24px">
+    <div class="card"><span class="ci"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 8l9 6 9-6"/></svg></span><h3>Email us</h3><p>Best for anything about a collaboration, a payment or your account.</p>
+      <span class="copy"><span id="em">promoconnect.in@gmail.com</span><button type="button" id="copyEm">Copy</button></span></div>
+    <div class="card"><span class="ci"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/></svg></span><h3>Instagram</h3><p>Message us for quick questions, and follow for new brands.</p><a href="https://instagram.com/promoconnect.in">@promoconnect.in</a></div>
+    <div class="card"><span class="ci"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span><h3>Complaints</h3><p>Grievance officer: Divyanshu Goyal. We acknowledge complaints within 48 hours and aim to resolve them within 30 days.</p><a href="contact.html">Contact details</a></div>
+  </div>
+</section>
+
+</main>
+<footer><div class="wrap">
+  <span>© 2026 PromoConnect · Made in India · promoconnect.in@gmail.com · <a href="https://instagram.com/promoconnect.in" target="_blank" rel="noopener">Instagram @promoconnect.in</a></span>
+  <nav><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="dashboard.html">My dashboard</a><a href="help.html">Help</a><a href="pricing.html">Pricing</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="refund.html">Refunds</a><a href="contact.html">Contact</a></nav>
+</div></footer>
+<script>(function(){var b=document.querySelector('.pn-menu'),p=document.getElementById('pnPanel');if(!b||!p)return;
+b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));p.hidden=o;});
+p.addEventListener('click',function(e){if(e.target.closest('a')){b.setAttribute('aria-expanded','false');p.hidden=true;}});})();</script>
+<script>
+(function(){
+  var q = document.getElementById('q'), items = [].slice.call(document.querySelectorAll('#faq details')), chips = [].slice.call(document.querySelectorAll('#chips button')), none = document.getElementById('none'), cat = 'all';
+  function apply(){ var t = q.value.trim().toLowerCase(), shown = 0;
+    items.forEach(function(d){ var ok = (cat === 'all' || d.dataset.c === cat) && (!t || d.textContent.toLowerCase().indexOf(t) !== -1); d.hidden = !ok; if (ok) shown++; if (t && ok && shown <= 3) d.open = true; if (!t) d.open = false; });
+    none.hidden = shown > 0; }
+  q.addEventListener('input', apply);
+  chips.forEach(function(b){ b.addEventListener('click', function(){ cat = b.dataset.c; chips.forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); }); apply(); }); });
+  var cb = document.getElementById('copyEm');
+  cb.addEventListener('click', function(){ var done = function(){ cb.textContent = 'Copied'; setTimeout(function(){ cb.textContent = 'Copy'; }, 1600); };
+    try { navigator.clipboard.writeText(document.getElementById('em').textContent).then(done, function(){ window.getSelection().selectAllChildren(document.getElementById('em')); }); }
+    catch (e) { window.getSelection().selectAllChildren(document.getElementById('em')); } });
+  if (location.hash) { var k = location.hash.slice(1); var b = chips.filter(function(x){ return x.dataset.c === k; })[0]; if (b) b.click(); }
+})();
+</script>
+</body>
+</html>
