@@ -137,7 +137,15 @@ body.brand .obj.c{opacity:0}body.brand .obj.b{opacity:1}
 .lobby .perks li{display:flex;gap:12px;align-items:center;background:color-mix(in srgb,var(--card) 82%,transparent);border:1px solid var(--line);border-radius:16px;padding:12px 14px;font-size:15px;animation:lb-up .7s cubic-bezier(.2,.8,.2,1) both}
 .lobby .perks li:nth-child(1){animation-delay:.55s}.lobby .perks li:nth-child(2){animation-delay:.68s}.lobby .perks li:nth-child(3){animation-delay:.81s}
 .lobby .perks i{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;flex:none;font-style:normal;font-weight:700;color:#fff;background:var(--lc,#1F55F0)}
-.lobby .go{margin-top:30px;animation:lb-up .7s cubic-bezier(.2,.8,.2,1) .95s both}
+.lobby .trust{max-width:520px;margin:34px auto 0;text-align:left}
+.lobby .trust h2{font-size:15px;font-weight:600;color:var(--muted);text-align:center;margin:0 0 4px;letter-spacing:-.01em}
+.lobby .trust .tc{display:flex;gap:12px;align-items:flex-start;background:color-mix(in srgb,var(--card) 82%,transparent);border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:10px;animation:lb-up .7s cubic-bezier(.2,.8,.2,1) both}
+.lobby .trust .tc:nth-child(2){animation-delay:.95s}.lobby .trust .tc:nth-child(3){animation-delay:1.05s}.lobby .trust .tc:nth-child(4){animation-delay:1.15s}
+.lobby .trust .tc i{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;flex:none;font-style:normal;font-weight:700;color:var(--lc,#1F55F0);background:color-mix(in srgb,var(--lc,#1F55F0) 14%,transparent)}
+.lobby .trust .tc b{display:block;font-size:15px;font-weight:600}
+.lobby .trust .tc span{display:block;font-size:14px;color:var(--muted);line-height:1.5;margin-top:2px}
+.lobby .trust .fine{font-size:12.5px;color:var(--muted);text-align:center;margin:14px 0 0}
+.lobby .go{margin-top:30px;animation:lb-up .7s cubic-bezier(.2,.8,.2,1) 1.3s both}
 .lobby .go .btn{font-size:17px;padding:16px 30px;background:var(--lc,#1F55F0)}
 .lobby .other{display:block;margin:16px auto 0;font-size:14px;color:var(--muted);background:none;border:0;font:inherit;cursor:pointer;text-decoration:underline}
 @keyframes lb-in{from{opacity:0;transform:scale(.4) rotate(-12deg)}to{opacity:1;transform:none}}
@@ -195,6 +203,7 @@ main,.scene,.formarea,.lobby{max-width:100%;overflow-x:clip}
       <div class="kick" id="lbKick">Creator lobby</div>
       <h1 id="lbTitle">Welcome, <span class="serif">creator.</span></h1>
       <ul class="perks" id="lbPerks"></ul>
+      <div class="trust" id="lbTrust"></div>
       <div class="go"><button class="btn" type="button" id="lbStart">Let's start <span aria-hidden="true">→</span></button>
       <button class="other" type="button" id="lbOther">I'm a brand instead</button></div>
     </div>
@@ -230,7 +239,7 @@ main,.scene,.formarea,.lobby{max-width:100%;overflow-x:clip}
           <label><input type="radio" name="c-col" value="Yes"><span>Yes</span></label><label><input type="radio" name="c-col" value="No"><span>No, this is my first</span></label>
         </div><span class="err"></span></div>
         <hr class="sep">
-        <div class="f full"><label class="agree"><input type="checkbox" name="label" value="Agreed" required><span>I'll label every collaboration post #gifted or #ad, as ASCI rules require.</span></label><span class="err"></span></div>
+        <div class="f full"><label class="agree"><input type="checkbox" name="label" value="Agreed" required><span>I'll label every collaboration post #ad, as ASCI rules require.</span></label><span class="err"></span></div>
         <div class="f full"><label class="agree"><input type="checkbox" name="leaderboard" value="Yes"><span>Show my Instagram handle and badges on the public <a href="leaderboard.html" target="_blank">Top 10</a> when I earn a place. <span class="opt">(optional, you can change this later)</span></span></label><span class="err"></span></div>
         <div class="f full"><label class="agree"><input type="checkbox" name="terms" value="Agreed" required><span>I'm 18 or older and I agree to the <a href="terms.html" target="_blank">Terms</a> and <a href="privacy.html" target="_blank">Privacy Policy</a>.</span></label><span class="err"></span></div>
         <div class="submit"><button class="btn" type="submit">Join as a creator <span aria-hidden="true">→</span></button><span class="formerr" role="alert"></span></div>
@@ -317,19 +326,22 @@ main,.scene,.formarea,.lobby{max-width:100%;overflow-x:clip}
   var LOBBY = {
     creator: { c:'#E8467C', kick:'Creator lobby', title:'Welcome, <span class="serif">creator.</span>', other:"I'm a brand instead",
       icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor"/></svg>',
-      perks:[['₹0','Free to join, always'],['▣','Get products from homegrown brands, free'],['↗','Honest reviews that grow your audience']] },
+      perks:[['₹0','Free to join, always'],['▣','Get products from homegrown brands, free'],['↗','Honest reviews that grow your audience']],
+      trust:[["!","Fines can reach creators too","Hidden promotions can cost a creator up to ₹10 lakh. Label every post #ad and we check it before it counts."],["%","Free products can mean tax","Products you keep count as income. Past ₹20,000 from one brand in a year, 10% TDS applies. Returned products don't count."],["“","Your opinion stays yours","A free product never buys a good review. Say what you really think, and know what's expected before you say yes."]] },
     brand: { c:'#1F55F0', kick:'Brand lobby', title:'Welcome, <span class="serif">brand.</span>', other:"I'm a creator instead",
       icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l2-5h14l2 5"/><path d="M4 9v11h16V9"/><path d="M3 9h18"/><path d="M9 20v-6h6v6"/></svg>',
-      perks:[['✓','Creators matched to your product and city'],['#','Every post checked and labelled'],['₹','Founding brands start free']] }
+      perks:[['✓','Creators matched to your product and city'],['#','Every post checked and labelled'],['₹','Founding brands start free']],
+      trust:[["#","Use an approved label","ASCI lists #Ad, #Sponsored and #Partnership. #gifted isn't on its list, so we use #ad."],["!","Fines reach brands too","India's consumer authority can fine brands and creators up to ₹10 lakh, and up to ₹50 lakh for repeat offences."],["%","Free products can mean tax","Gift one creator over ₹20,000 in a year and you deduct 10% TDS. Returned products don't count."]] }
   };
   var lobby = $('#lobby'), formarea = $('#formarea'), lobbyRole = 'creator';
   function showLobby(t){ lobbyRole = t; var L = LOBBY[t];
     lobby.style.setProperty('--lc', L.c); $('#lbBadge').style.background = 'linear-gradient(150deg,' + L.c + ',' + (t === 'brand' ? '#22B3A6' : '#F5B638') + ')';
     $('#lbBadge').innerHTML = L.icon; $('#lbKick').textContent = L.kick; $('#lbTitle').innerHTML = L.title; $('#lbOther').textContent = L.other;
     $('#lbPerks').innerHTML = L.perks.map(function(p){ return '<li><i>' + p[0] + '</i>' + p[1] + '</li>'; }).join('');
+    $('#lbTrust').innerHTML = '<h2>Good to know before you start</h2>' + L.trust.map(function(t){ return '<div class="tc"><i aria-hidden="true">' + t[0] + '</i><div><b>' + t[1] + '</b><span>' + t[2] + '</span></div></div>'; }).join('') + '<p class="fine">General information, not legal advice.</p>';
     document.body.classList.toggle('brand', t === 'brand');
     lobby.classList.remove('leave'); lobby.hidden = false; formarea.hidden = true;
-    lobby.querySelectorAll('.badge,.kick,h1,.perks li,.go').forEach(function(el){ el.style.animation = 'none'; el.offsetHeight; el.style.animation = ''; });
+    lobby.querySelectorAll('.badge,.kick,h1,.perks li,.trust .tc,.go').forEach(function(el){ el.style.animation = 'none'; el.offsetHeight; el.style.animation = ''; });
     if (location.hash !== '#' + t) history.replaceState(null, '', '#' + t);
   }
   function startForm(){
@@ -401,7 +413,7 @@ main,.scene,.formarea,.lobby{max-width:100%;overflow-x:clip}
     $('#doneTitle').textContent = type === 'creator' ? 'Welcome, ' + first + '!' : 'Thanks, ' + first + '!';
     $('#doneText').textContent = 'We have sent a welcome email to ' + $('[name=email]', form).value.trim() + '. Check your spam folder if you can\'t see it.';
     $('#doneSteps').innerHTML = type === 'creator'
-      ? '<li>When a brand fits your profile, we message you with the product.</li><li>Say yes, and the brand ships it to you free.</li><li>Post your honest review within 14 days, labelled #gifted, and keep it.</li>'
+      ? '<li>When a brand fits your profile, we message you with the product.</li><li>Say yes, and the brand ships it to you free.</li><li>Post your honest review within 14 days, labelled #ad, and keep it.</li>'
       : '<li>We email you to book a quick 10-minute call.</li><li>We send you creator profiles that fit your product.</li><li>You ship only to the creators you approve.</li>';
     scene.hidden = true; doneWrap.hidden = false; done.focus(); confetti();
     window.scrollTo({ top: 0, behavior: 'smooth' });

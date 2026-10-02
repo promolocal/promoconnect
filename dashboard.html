@@ -294,7 +294,7 @@ function inr(n){ return '₹' + Number(n || 0).toLocaleString('en-IN'); }
     var next = key === 'pending'
       ? ['We are reviewing your Instagram profile. This usually takes 2 working days.', 'Once you are verified, we match you with brands that fit your topics.', 'We email you when a brand wants to send you a product.']
       : key === 'paused' ? ['Your profile is paused, so you will not get new matches.', 'Email promoconnect.in@gmail.com when you want to start again.']
-      : ['We email you when a brand wants to send you a product.', 'Post within 14 days of delivery, labelled #gifted or #ad, to earn the on-time bonus.', 'We check the post, then add your points here.'];
+      : ['We email you when a brand wants to send you a product.', 'Post within 14 days of delivery, labelled #ad, to earn the on-time bonus.', 'We check the post, then add your points here.'];
     $('dNext').innerHTML = next.map(function(t, i){ return '<li><i>' + (i + 1) + '</i><span>' + esc(t) + '</span></li>'; }).join('');
     $('dNote').hidden = !me.note; $('dNote').innerHTML = me.note ? '<b>Note from the team:</b> ' + esc(me.note) : '';
     setBoard(!!me.board);
