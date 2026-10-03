@@ -7,7 +7,7 @@
 <meta name="description" content="PromoConnect plans for brands and creators, in Indian rupees.">
 <link rel="icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&family=Lora:wght@600;700&display=swap">
 <style>
 :root{--bg:#f6f3ee;--card:#fffdf9;--ink:#121212;--muted:#5f5b55;--line:#e2ddd4;--blue:#1F55F0;--blue-ink:#FFFFFF;--yel:#F5B638;--soft:#EAF0FF}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0c0c0d;--card:#18181b;--ink:#f3efe8;--muted:#a19c94;--line:#2a2a2e;--blue:#5B7CFF;--soft:#1B2340}}
@@ -102,6 +102,83 @@ footer a{color:var(--muted)}
 .pn-panel a::after{content:"›";color:var(--muted)}
 @media (max-width:1060px){.pn-links,.pn-dash{display:none}.pn-menu{display:grid}}
 @media (min-width:1061px){.pn-panel{display:none!important}}
+
+/* pricing page: brand style (blue bands, cream cards, yellow accents) */
+.pp{--pb:#1F55F0;--pc:#F4F2EC;--py:#F5B638;--pi:#14161A;--pm:#55555E;--pw:#FFFFFF;--ps:#DCE4FF}
+.pp h1,.pp h2,.pp h3{font-family:Lora,Georgia,serif;font-weight:700;letter-spacing:-.015em}
+.pp-in{max-width:1120px;margin:0 auto;padding:0 20px}
+.pp-hero{background:var(--pb);color:var(--pw);padding:72px 0 40px}
+.pp-hero h1{font-size:clamp(40px,7vw,72px);line-height:1.04;margin:0 0 16px;max-width:15ch;text-wrap:balance}
+.pp-hero p{color:var(--ps);font-size:clamp(17px,2.2vw,20px);max-width:56ch;margin:0}
+.pp-jump{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.pp-jump a{text-decoration:none;font-weight:600;font-size:15px;padding:11px 18px;border-radius:999px;background:var(--py);color:var(--pi)}
+.pp-jump a+a{background:transparent;color:var(--pw);box-shadow:inset 0 0 0 2px rgba(255,255,255,.55)}
+.pp-band{background:var(--pb);color:var(--pw);padding:48px 0 72px}
+.pp-band#creators{padding-top:64px}
+.pp-band h2{color:var(--pw)}
+.pp h2{font-size:clamp(30px,4.6vw,44px);line-height:1.1;margin:0 0 10px}
+.pp-lede{max-width:60ch;margin:0 0 28px;font-size:18px}
+.pp-band .pp-lede{color:var(--ps)}
+.pp-plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;align-items:start}
+.pp-plan{background:var(--pc);color:var(--pi);border-radius:26px;padding:28px 26px 26px;position:relative}
+.pp-plan.hot{box-shadow:0 0 0 5px var(--py)}
+.pp-plan h3{font-size:34px;margin:0;line-height:1.1;color:var(--pi)}
+.pp-pop{position:absolute;top:30px;right:24px;margin:0;background:var(--py);color:var(--pi);font-size:13px;font-weight:700;padding:5px 12px;border-radius:999px}
+.pp-for{margin:6px 0 18px;color:var(--pm);font-size:15px}
+.pp-price{margin:0;font-weight:700;font-size:42px;letter-spacing:-.03em;color:var(--pb);line-height:1}
+.pp-price span{font-size:16px;font-weight:500;color:var(--pm);letter-spacing:0;margin-left:6px}
+.pp-usd{margin:8px 0 0;font-size:14px;font-weight:600;color:var(--pb)}
+.pp-list{list-style:none;padding:0;margin:20px 0 0;border-top:1px solid rgba(20,22,26,.12)}
+.pp-list li{position:relative;padding:10px 0 10px 28px;border-bottom:1px solid rgba(20,22,26,.08);font-size:15.5px;line-height:1.45}
+.pp-list li::before{content:"";position:absolute;left:2px;top:15px;width:14px;height:8px;border-left:2.5px solid var(--pb);border-bottom:2.5px solid var(--pb);transform:rotate(-45deg)}
+.pp-inc{margin:18px 0 0;font-size:14.5px;line-height:1.5;color:var(--pb);font-weight:500}
+.pp-inc b{display:inline-block;background:var(--pb);color:var(--pw);font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:999px;margin-right:6px}
+.pp-plain{padding:72px 0}
+.pp-plain .pp-lede{color:var(--muted)}
+.pp-kits{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;align-items:start}
+.pp-kit{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:26px}
+.pp-kit h3{font-size:30px;margin:0;color:var(--ink)}
+.pp-kit h3 span{display:block;font-family:Geist,system-ui,sans-serif;font-size:15px;font-weight:600;color:var(--blue);letter-spacing:0;margin-top:4px}
+.pp-kit .pp-plus{margin:16px 0 0;font-size:14.5px;color:var(--muted);font-weight:600}
+.pp-kit .pp-list{border-top-color:var(--line)}
+.pp-kit .pp-list li{border-bottom-color:var(--line)}
+.pp-kit .pp-list li::before{border-color:var(--blue)}
+.pp-kit.hot{border:2px solid var(--yel)}
+.pp-fine{font-size:14px;color:var(--muted);margin:20px 0 0;max-width:70ch}
+.pp-sun{background:var(--py);color:var(--pi);padding:72px 0}
+.pp-sun h2{color:var(--pi)}
+.pp-sun .pp-lede{color:#3d3a33}
+.pp-ba-head{display:grid;grid-template-columns:1fr 52px 1fr;gap:14px;margin:0 0 12px;font-weight:700;font-size:14px}
+.pp-ba-head span{justify-self:start;padding:6px 14px;border-radius:999px;background:var(--pi);color:var(--pw)}
+.pp-ba-head span:last-child{grid-column:3;background:var(--pb)}
+.pp-ba{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.pp-ba li{display:grid;grid-template-columns:1fr 52px 1fr;gap:14px;align-items:center;background:var(--pc);border-radius:20px;padding:18px 22px}
+.pp-b{color:var(--pm);font-size:16px}
+.pp-a{color:var(--pi);font-weight:700;font-size:16.5px}
+.pp-arrow{width:40px;height:40px;border-radius:50%;background:var(--pb);color:var(--pw);display:grid;place-items:center;font-weight:700;justify-self:center}
+.pp-sun .pp-fine{color:#3d3a33}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.pp-extras{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;align-items:start}
+.pp-extra{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px}
+.pp-extra h3{font-size:24px;margin:0 0 6px;color:var(--ink)}
+.pp-extra dl{margin:10px 0 0}
+.pp-extra div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.pp-extra dt{color:var(--ink);font-size:15.5px}
+.pp-extra dd{margin:0;font-weight:700;color:var(--blue);text-align:right;white-space:nowrap;font-size:15.5px}
+.pp-extra dd small{display:block;font-weight:500;color:var(--muted);font-size:12.5px}
+.pp-note2{margin:24px 0 0;color:var(--ps);max-width:64ch;font-size:15.5px}
+.pp-narrow > *{max-width:64ch}
+.pp-narrow p{color:var(--muted)}
+.pp-narrow p b{color:var(--ink)}
+@media (max-width:640px){
+ .pp-hero{padding:52px 0 32px}.pp-band,.pp-plain,.pp-sun{padding:52px 0}
+ .pp-ba-head{display:none}
+ .pp-ba li{grid-template-columns:1fr;gap:6px;padding:16px 18px}
+ .pp-arrow{display:none}
+ .pp-b::before{content:"Before: " / "";font-weight:600}
+ .pp-a::before{content:"After: " / "";color:var(--pb)}
+ .pp-pop{position:static;display:inline-block;margin:0 0 10px}
+}
 </style>
 </head>
 <body>
@@ -109,48 +186,94 @@ footer a{color:var(--muted)}
   <a class="pn-logo" href="index.html"><img src="logo.png" alt="">PromoConnect</a>
   <nav class="pn-links" aria-label="Main"><a href="index.html#how">How it works</a><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="pricing.html" aria-current="page">Pricing</a><a href="help.html">Help</a><a href="https://instagram.com/promoconnect.in">Instagram</a></nav>
   <a class="pn-dash" href="dashboard.html">My dashboard</a>
-  <a class="pn-join" href="join.html">Join free</a>
+  <a class="pn-join" href="join.html">Join now</a>
   <button class="pn-menu" type="button" aria-expanded="false" aria-controls="pnPanel" aria-label="Menu"><span></span><span></span></button>
 </div><nav class="pn-panel" id="pnPanel" aria-label="Menu" hidden><a href="index.html#how">How it works</a><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="pricing.html">Pricing</a><a href="help.html">Help</a><a href="https://instagram.com/promoconnect.in">Instagram</a><a href="dashboard.html">My dashboard</a><a href="contact.html">Contact</a></nav></header>
 <main>
+<section class="pp pp-hero"><div class="pp-in">
+  <h1>Plans that grow your brand</h1>
+  <p>Real creators, every post checked, and creative work made for your brand. Prices in rupees, with dollar prices for brands and creators outside India. You always see the full price before you pay.</p>
+  <nav class="pp-jump" aria-label="Jump to plans"><a href="#brands">For brands</a><a href="#creators">For creators</a></nav>
+</div></section>
 
-<div class="wrap doc" style="max-width:1080px">
-  <h1>Pricing</h1>
-  <p class="meta">All prices in Indian rupees (₹). Taxes extra where applicable. Pay by UPI (Google Pay, PhonePe, Paytm, BHIM), card, netbanking or wallet through Razorpay. Brands and creators outside India can pay with PayPal.</p>
-  <div class="note"><b>Founding offer:</b> brands that join during our launch get their first collaborations free. You will always see the price before you pay anything.</div>
-
+<section class="pp pp-band" id="brands"><div class="pp-in">
   <h2>For brands</h2>
-  <div class="grid3" style="margin-top:14px">
-    <div class="card"><span class="tag">Lite</span><div class="price">₹999 <small>/ month</small></div>
-      <ul><li>2 live products</li><li>Up to 5 creators a month</li><li>Verified creators only</li><li>Links to every Reel</li><li>12% commission on paid deals</li></ul></div>
-    <div class="card feature"><span class="tag">Pro · most popular</span><div class="price">₹4,999 <small>/ month</small></div>
-      <ul><li>5 live products</li><li>Up to 20 creators a month</li><li>Priority matching</li><li>Results report: views, likes, saves</li><li>Reshare the Reels on your page</li><li>1 featured week a month</li><li>10% commission on paid deals</li></ul></div>
-    <div class="card"><span class="tag">Elite</span><div class="price">₹10,999 <small>/ month</small></div>
-      <ul><li>Unlimited live products</li><li>Up to 60 creators a month</li><li>We run the whole campaign for you</li><li>Use the Reels in your paid ads</li><li>2 featured weeks a month</li><li>Top Brand badge on the site</li><li>WhatsApp priority support</li><li>Monthly results call</li><li>8% commission on paid deals</li></ul></div>
+  <p class="pp-lede">One monthly price covers the creators' pay, our full service and creative work for your brand. You only send the product.</p>
+  <div class="pp-plans">
+      <article class="pp-plan"><h3>Spark</h3><p class="pp-for">Starter creators: new, honest, growing</p>
+        <p class="pp-price">₹17,999<span>/ month</span></p><p class="pp-usd">$189 a month outside India</p>
+        <ul class="pp-list"><li>5 creator videos a month</li><li>Creators matched to your product and city</li><li>Every post checked and labelled #ad</li><li>Results report every month</li></ul><p class="pp-inc"><b>Included</b>Hooks and captions, a creator brief, 1 re-edit and video covers</p></article>
+      <article class="pp-plan hot"><p class="pp-pop">Most popular</p><h3>Rise</h3><p class="pp-for">Rising creators who work with brands regularly</p>
+        <p class="pp-price">₹44,999<span>/ month</span></p><p class="pp-usd">$469 a month outside India</p>
+        <ul class="pp-list"><li>4 creator videos a month</li><li>Priority matching</li><li>Every post checked and labelled #ad</li><li>Results report: views, likes, saves</li></ul><p class="pp-inc"><b>Included</b>Everything in Spark, plus AI product photos, a content calendar, a carousel and a brand look kit</p></article>
+      <article class="pp-plan"><h3>Star</h3><p class="pp-for">Premium creators with proven brand work</p>
+        <p class="pp-price">₹89,999<span>/ month</span></p><p class="pp-usd">$939 a month outside India</p>
+        <ul class="pp-list"><li>3 premium creator videos a month</li><li>Creators hand-picked by our team</li><li>Every post checked and labelled #ad</li><li>Monthly results and strategy call</li><li>WhatsApp priority support</li></ul><p class="pp-inc"><b>Included</b>Everything in Rise, plus a monthly campaign idea, a 3D reveal, dubbing and a profile refresh</p></article>
   </div>
+</div></section>
 
-  <h2>Add-ons for brands</h2>
-  <ul>
-    <li><b>Featured listing:</b> ₹1,499 per week at the top of the deals list.</li>
-    <li><b>Managed campaign:</b> from ₹25,000 for brands on Lite or Pro. We choose the creators and run the campaign for you. Included in Elite.</li>
-  </ul>
+<section class="pp pp-plain" id="creative"><div class="pp-in">
+  <h2>What we create for your brand</h2>
+  <p class="pp-lede">Every plan comes with creative work made just for your brand, so your page looks better every month, not just busier.</p>
+  <div class="pp-kits">
+      <article class="pp-kit"><h3>Spark<span>Your brand starter kit</span></h3><ul class="pp-list"><li>10 scroll-stopping hooks and captions for your product, every month</li><li>A creator brief: the shots, angles and key message creators should show</li><li>1 creator video re-edited into a short for your page</li><li>Branded covers for your creator videos</li></ul></article>
+      <article class="pp-kit hot"><h3>Rise<span>Your brand glow-up</span></h3><p class="pp-plus">Everything in Spark, plus:</p><ul class="pp-list"><li>5 AI-styled product photos a month</li><li>A monthly content calendar for your page</li><li>1 designed carousel post a month</li><li>A brand look kit (one time): your colours, fonts and a colour filter so every video matches</li></ul></article>
+      <article class="pp-kit"><h3>Star<span>Your brand launch studio</span></h3><p class="pp-plus">Everything in Rise, plus:</p><ul class="pp-list"><li>One big campaign idea each month: a theme and story for your creators</li><li>A 3D-style product reveal reel</li><li>1 video dubbed into Hindi or a regional language</li><li>An Instagram profile refresh (one time): bio, highlight covers and pinned posts</li><li>A monthly strategy call</li></ul></article>
+  </div>
+  <p class="pp-fine">Realistic AI photos and videos carry Instagram's AI label. Creator videos are only re-edited or dubbed with the creator's permission.</p>
+</div></section>
 
+<section class="pp pp-sun" id="before-after"><div class="pp-in">
+  <h2>Before and after PromoConnect</h2>
+  <p class="pp-lede">How things usually change for a small brand once creators start talking about it.</p>
+  <div class="pp-ba-head" aria-hidden="true"><span>Before</span><span>With PromoConnect</span></div>
+  <ul class="pp-ba"><li><span class="pp-b"><span class="sr">Before: </span>Only you talk about your product</span><span class="pp-arrow" aria-hidden="true">→</span><span class="pp-a"><span class="sr">With PromoConnect: </span>Real creators review it honestly to their followers</span></li><li><span class="pp-b"><span class="sr">Before: </span>The same few photos, nothing new to post</span><span class="pp-arrow" aria-hidden="true">→</span><span class="pp-a"><span class="sr">With PromoConnect: </span>Fresh creator videos and edits every month</span></li><li><span class="pp-b"><span class="sr">Before: </span>One or two product photos</span><span class="pp-arrow" aria-hidden="true">→</span><span class="pp-a"><span class="sr">With PromoConnect: </span>Creator videos, styled product photos and a monthly content plan (Rise and Star)</span></li><li><span class="pp-b"><span class="sr">Before: </span>Weeks of DMs, not sure who's real</span><span class="pp-arrow" aria-hidden="true">→</span><span class="pp-a"><span class="sr">With PromoConnect: </span>Creators matched to your product and checked for you</span></li><li><span class="pp-b"><span class="sr">Before: </span>Not sure what #ad rules apply</span><span class="pp-arrow" aria-hidden="true">→</span><span class="pp-a"><span class="sr">With PromoConnect: </span>Every post checked and labelled #ad</span></li><li><span class="pp-b"><span class="sr">Before: </span>Guessing what worked</span><span class="pp-arrow" aria-hidden="true">→</span><span class="pp-a"><span class="sr">With PromoConnect: </span>A results report every month</span></li><li><span class="pp-b"><span class="sr">Before: </span>English only</span><span class="pp-arrow" aria-hidden="true">→</span><span class="pp-a"><span class="sr">With PromoConnect: </span>Hindi or regional-language versions (Star)</span></li></ul>
+  <p class="pp-fine">An example of the change, not a promise of sales or views. Results depend on your product, price and audience. Tip: give each creator their own discount code, so you can see which posts bring sales.</p>
+</div></section>
+
+<section class="pp pp-plain" id="more"><div class="pp-in">
+  <h2>More ways to buy</h2>
+  <p class="pp-lede">Test with a single video, or add extras to any plan.</p>
+  <div class="pp-extras">
+    <article class="pp-extra"><h3>Single videos</h3><dl>
+      <div><dt>Starter creator</dt><dd>₹3,999<small>$42 outside India</small></dd></div>
+      <div><dt>Rising creator</dt><dd>₹11,999<small>$125 outside India</small></dd></div>
+      <div><dt>Premium creator</dt><dd>₹34,999<small>$365 outside India</small></dd></div></dl></article>
+    <article class="pp-extra"><h3>Prices by category</h3><dl>
+      <div><dt>Food, home, lifestyle, fitness</dt><dd>Standard</dd></div>
+      <div><dt>Beauty, skincare, fashion</dt><dd>+30%</dd></div>
+      <div><dt>Tech and gadgets</dt><dd>+50%</dd></div>
+      <div><dt>Finance</dt><dd>On request</dd></div></dl></article>
+    <article class="pp-extra"><h3>Add-ons</h3><dl>
+      <div><dt>Ad usage rights: use the video in your paid ads</dt><dd>+50%</dd></div>
+      <div><dt>Extra stories alongside the reel</dt><dd>+30%</dd></div></dl>
+      <p class="pp-fine" style="margin-top:12px">Add-on prices are a share of the video price.</p></article>
+  </div>
+</div></section>
+
+<section class="pp pp-band" id="creators"><div class="pp-in">
   <h2>For creators</h2>
-  <div class="grid3" style="margin-top:14px">
-    <div class="card"><span class="tag">Lite</span><div class="price">₹0</div>
-      <ul><li>3 applications a month</li><li>Keep every product you review</li><li>Points, badges and the Top 10</li><li>10% fee on cash payouts</li></ul></div>
-    <div class="card feature"><span class="tag">Pro · most popular</span><div class="price">₹399 <small>/ month</small></div>
-      <ul><li>15 applications a month</li><li>Pro badge on your profile</li><li>See new products 24 hours early</li><li>5% fee on cash payouts</li></ul></div>
-    <div class="card"><span class="tag">Elite</span><div class="price">₹999 <small>/ month</small></div>
-      <p style="margin:2px 0 0;font-size:.9em;opacity:.7">or $10.99 a month outside India</p>
-      <ul><li>Unlimited applications</li><li>First pick of premium products</li><li>Featured profile shown to brands</li><li>Profile review with tips</li><li>Elite badge</li><li>0% fee on cash payouts</li></ul></div>
+  <p class="pp-lede">Your plan decides which campaigns you can apply for. You earn for every video, paid after we check your post is live.</p>
+  <div class="pp-plans">
+      <article class="pp-plan"><h3>Starter</h3><p class="pp-for">For creators starting out with brands</p>
+        <p class="pp-price">₹299<span>/ month</span></p><p class="pp-usd">$3.49 a month outside India</p>
+        <ul class="pp-list"><li>Starter campaigns</li><li>Verified profile</li><li>Points, badges and the Top 10</li><li>#ad and tax guidance</li><li>Typical market pay: ₹1,500–₹3,000 per video</li></ul></article>
+      <article class="pp-plan hot"><p class="pp-pop">Most popular</p><h3>Rising</h3><p class="pp-for">For creators who already work with brands</p>
+        <p class="pp-price">₹599<span>/ month</span></p><p class="pp-usd">$6.49 a month outside India</p>
+        <ul class="pp-list"><li>Starter and Rising campaigns</li><li>Priority matching</li><li>See new campaigns 24 hours early</li><li>Rising badge</li><li>Typical market pay: ₹6,000–₹10,000 per video</li></ul></article>
+      <article class="pp-plan"><h3>Premium</h3><p class="pp-for">For creators with proven brand work</p>
+        <p class="pp-price">₹999<span>/ month</span></p><p class="pp-usd">$10.99 a month outside India</p>
+        <ul class="pp-list"><li>All campaigns, including Premium</li><li>First pick of new campaigns</li><li>Featured profile shown to brands</li><li>Profile review with tips</li><li>Typical market pay: ₹18,000–₹25,000+ per video</li></ul></article>
   </div>
+  <p class="pp-note2">We set your tier after checking your profile and past brand work. Deliver 5 collabs on time, labelled #ad, to be reviewed for the next tier.</p>
+</div></section>
 
-  <h2>How paid deals work</h2>
-  <p>When a brand offers cash as well as a product, the brand pays the cash plus its commission when it accepts a creator. The money is held until the creator's post is checked, then paid to the creator minus their fee. If no post arrives within 14 days, the brand gets the cash back. See our <a href="refund.html">refund policy</a>.</p>
-  <p>Plans renew monthly and you can cancel any time. Yearly option: pay for 10 months and get 12.</p>
-</div>
-
+<section class="pp pp-plain"><div class="pp-in pp-narrow">
+  <h2>How payments work</h2>
+  <p>Brands pay for their plan at the start of each month. Creators are paid for each video after we check that the post is live and labelled #ad. If a creator doesn't post within 14 days, the brand gets the money for that video back. See our <a href="refund.html">refund policy</a>.</p>
+  <p>Plans renew monthly and you can cancel any time. Yearly option: save about 17% when you pay for a year upfront.</p>
+  <p><b>Ways to pay:</b> UPI (Google Pay, PhonePe, Paytm, BHIM), card, netbanking or wallet through Razorpay. Brands and creators outside India can pay with PayPal. Taxes extra where applicable.</p>
+</div></section>
 </main>
 <footer><div class="wrap">
   <div>© 2026 PromoConnect · Homegrown brands, real creators · India<br><a href="mailto:promoconnect.in@gmail.com">promoconnect.in@gmail.com</a> · <a href="https://instagram.com/promoconnect.in">@promoconnect.in</a></div>

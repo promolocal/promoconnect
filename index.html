@@ -540,6 +540,22 @@ main,.scene,.formarea,.lobby{max-width:100%;overflow-x:clip}
 .pn-panel a::after{content:"›";color:var(--muted)}
 @media (max-width:1060px){.pn-links,.pn-dash{display:none}.pn-menu{display:grid}}
 @media (min-width:1061px){.pn-panel{display:none!important}}
+
+/* homepage pricing: brand style (blue band, cream cards, yellow accent) */
+#pricing{background:#1F55F0;color:#fff;padding-top:clamp(72px,10vw,120px)!important;padding-bottom:clamp(72px,10vw,120px)}
+#pricing .sec-head h2{color:#fff}
+#pricing .sec-head h2 .serif{color:#F5B638}
+#pricing .sec-head p{color:#DCE4FF}
+#pricing .plans-h{color:#DCE4FF}
+#pricing .plan,#pricing .plan.hot{background:#F4F2EC;color:#14161A;border:0}
+#pricing .plan.hot{box-shadow:0 0 0 5px #F5B638}
+#pricing .plan .who,#pricing .plan.hot .who,#pricing .plan .per,#pricing .plan.hot .per{color:#55555E}
+#pricing .plan .pr{color:#1F55F0;font-weight:700}
+#pricing .plan li,#pricing .plan.hot li{color:#33343a;border-top:1px solid rgba(20,22,26,.1)}
+#pricing .plan li:last-child{color:#1F55F0;font-weight:600}
+#pricing .offer{color:#DCE4FF}
+#pricing .offer b{color:#fff}
+#pricing .offer a{color:#F5B638}
 </style>
 </head>
 <body>
@@ -547,7 +563,7 @@ main,.scene,.formarea,.lobby{max-width:100%;overflow-x:clip}
   <a class="pn-logo" href="#top"><img src="logo.png" alt="">PromoConnect</a>
   <nav class="pn-links" aria-label="Main"><a href="#how">How it works</a><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="pricing.html">Pricing</a><a href="help.html">Help</a><a href="https://instagram.com/promoconnect.in">Instagram</a></nav>
   <a class="pn-dash" href="dashboard.html">My dashboard</a>
-  <a class="pn-join" href="join.html">Join free</a>
+  <a class="pn-join" href="join.html">Join now</a>
   <button class="pn-menu" type="button" aria-expanded="false" aria-controls="pnPanel" aria-label="Menu"><span></span><span></span></button>
 </div><nav class="pn-panel" id="pnPanel" aria-label="Menu" hidden><a href="#how">How it works</a><a href="services.html">Services</a><a href="leaderboard.html">Top 10</a><a href="pricing.html">Pricing</a><a href="help.html">Help</a><a href="https://instagram.com/promoconnect.in">Instagram</a><a href="dashboard.html">My dashboard</a><a href="contact.html">Contact</a></nav></header>
 
@@ -563,7 +579,7 @@ main,.scene,.formarea,.lobby{max-width:100%;overflow-x:clip}
           <a class="btn acc" href="join.html#brand">I'm a brand <span class="ar">→</span></a>
           <a class="btn line" href="join.html#creator">I'm a creator <span class="ar">→</span></a>
         </div>
-        <div class="trust"><div class="avs"><span style="background:#1F55F0">B</span><span style="background:#F5B638;color:#121212">C</span><span style="background:#2E7D5B">✓</span><span style="background:#121212">+</span></div>Free for creators. Founding brands get their first collabs free.</div>
+        <div class="trust"><div class="avs"><span style="background:#1F55F0">B</span><span style="background:#F5B638;color:#121212">C</span><span style="background:#2E7D5B">✓</span><span style="background:#121212">+</span></div>Verified creators. Every post checked and labelled #ad.</div>
       </div>
       <div class="stage" id="heroStage">
         <div class="tilt" id="heroTilt">
@@ -728,20 +744,20 @@ main,.scene,.formarea,.lobby{max-width:100%;overflow-x:clip}
   </div></section>
 
   <section class="sec" id="pricing" style="padding-top:0"><div class="wrap">
-    <div class="sec-head"><span class="eyebrow"><i></i>Pricing</span><h2 class="reveal">Simple. In <span class="serif">rupees.</span></h2><p>Three plans each for brands and creators: Lite, Pro and Elite. Creators can always join free. Taxes extra where applicable.</p></div>
+    <div class="sec-head"><span class="eyebrow"><i></i>Pricing</span><h2 class="reveal">Simple. In <span class="serif">rupees.</span></h2><p>Three plans each for brands and creators, matched to the level of creator you need. Taxes extra where applicable.</p></div>
     <h3 class="plans-h">For brands</h3>
     <div class="plans">
-      <div class="plan"><div class="who"><i class="dot" style="background:var(--acc)"></i>Lite</div><div class="pr">₹999</div><div class="per">per month</div><ul><li>2 live products</li><li>Up to 5 creators a month</li><li>Verified creators only</li></ul></div>
-      <div class="plan hot"><div class="who"><i class="dot" style="background:var(--sun)"></i>Pro · popular</div><div class="pr">₹4,999</div><div class="per">per month</div><ul><li>5 live products</li><li>Up to 20 creators a month</li><li>Results report</li><li>Reshare the Reels on your page</li><li>1 featured week a month</li></ul></div>
-      <div class="plan"><div class="who"><i class="dot" style="background:var(--acc)"></i>Elite</div><div class="pr">₹10,999</div><div class="per">per month</div><ul><li>Unlimited live products</li><li>Up to 60 creators a month</li><li>We run the whole campaign for you</li><li>Use the Reels in your paid ads</li><li>2 featured weeks a month</li><li>WhatsApp priority support</li></ul></div>
+      <div class="plan"><div class="who"><i class="dot" style="background:var(--acc)"></i>Spark</div><div class="pr">₹17,999</div><div class="per">per month · $189 outside India</div><ul><li>5 videos from Starter creators</li><li>Every post checked and labelled #ad</li><li>Results report</li><li>Creative: hooks, creator brief, 1 re-edit, video covers</li></ul></div>
+      <div class="plan hot"><div class="who"><i class="dot" style="background:var(--sun)"></i>Rise · popular</div><div class="pr">₹44,999</div><div class="per">per month · $469 outside India</div><ul><li>4 videos from Rising creators</li><li>Priority matching</li><li>Every post checked and labelled #ad</li><li>Results report: views, likes, saves</li><li>Creative: AI photos, calendar, carousel, brand look kit</li></ul></div>
+      <div class="plan"><div class="who"><i class="dot" style="background:var(--acc)"></i>Star</div><div class="pr">₹89,999</div><div class="per">per month · $939 outside India</div><ul><li>3 videos from Premium creators</li><li>Hand-picked by our team</li><li>Monthly results and strategy call</li><li>WhatsApp priority support</li><li>Creative: campaign idea, 3D reveal, dubbing, profile refresh</li></ul></div>
     </div>
     <h3 class="plans-h">For creators</h3>
     <div class="plans">
-      <div class="plan"><div class="who"><i class="dot" style="background:var(--sun)"></i>Lite</div><div class="pr">₹0</div><div class="per">always free to join</div><ul><li>3 applications a month</li><li>Keep every product you review</li><li>Points, badges and the Top 10</li></ul></div>
-      <div class="plan hot"><div class="who"><i class="dot" style="background:var(--sun)"></i>Pro · popular</div><div class="pr">₹399</div><div class="per">per month</div><ul><li>15 applications a month</li><li>Pro badge on your profile</li><li>See new products 24 hours early</li></ul></div>
-      <div class="plan"><div class="who"><i class="dot" style="background:var(--sun)"></i>Elite</div><div class="pr">₹999</div><div class="per">per month · $10.99 outside India</div><ul><li>Unlimited applications</li><li>First pick of premium products</li><li>Featured profile shown to brands</li><li>0% fee on cash payouts</li></ul></div>
+      <div class="plan"><div class="who"><i class="dot" style="background:var(--sun)"></i>Starter</div><div class="pr">₹299</div><div class="per">per month · $3.49 outside India</div><ul><li>Starter campaigns</li><li>Points, badges and the Top 10</li><li>Typical pay ₹1,500–₹3,000 per video</li></ul></div>
+      <div class="plan hot"><div class="who"><i class="dot" style="background:var(--sun)"></i>Rising · popular</div><div class="pr">₹599</div><div class="per">per month · $6.49 outside India</div><ul><li>Starter and Rising campaigns</li><li>Priority matching</li><li>Typical pay ₹6,000–₹10,000 per video</li></ul></div>
+      <div class="plan"><div class="who"><i class="dot" style="background:var(--sun)"></i>Premium</div><div class="pr">₹999</div><div class="per">per month · $10.99 outside India</div><ul><li>All campaigns, including Premium</li><li>Featured profile shown to brands</li><li>Typical pay ₹18,000–₹25,000+ per video</li></ul></div>
     </div>
-    <p class="offer"><b>Founding offer:</b> brands that join during launch get their first collaborations free. <a href="pricing.html">Full pricing</a></p>
+    <p class="offer"><b>Want to test first?</b> Single videos start at ₹3,999. See the before and after for brands on our <a href="pricing.html">full pricing</a> page.</p>
   </div></section>
 
   <section class="sec" id="payments" style="padding-top:0"><div class="wrap">
@@ -755,7 +771,7 @@ main,.scene,.formarea,.lobby{max-width:100%;overflow-x:clip}
       </div>
       <div class="checkout" aria-label="Example checkout">
         <div class="co-top"><span>PromoConnect · Example checkout</span><span>Secure</span></div>
-        <div class="amt">₹999</div><div class="for">Lite plan · 1 month · taxes extra</div>
+        <div class="amt">₹17,999</div><div class="for">Spark plan · 1 month · taxes extra</div>
         <div class="ptabs" role="group" aria-label="Payment method">
           <button type="button" aria-pressed="true" data-pm="upi">UPI</button><button type="button" aria-pressed="false" data-pm="card">Card</button><button type="button" aria-pressed="false" data-pm="bank">Netbanking</button><button type="button" aria-pressed="false" data-pm="paypal">PayPal</button>
         </div>
@@ -766,7 +782,7 @@ main,.scene,.formarea,.lobby{max-width:100%;overflow-x:clip}
         <div class="ppanel" data-pp="card" hidden><div class="ln"><span>Visa, Mastercard, RuPay</span><span>Debit or credit</span></div><div class="ln"><span>Auto-renew</span><span>Cancel any time</span></div><div class="ln"><span>EMI</span><span>On eligible cards</span></div></div>
         <div class="ppanel" data-pp="bank" hidden><div class="ln"><span>SBI, HDFC, ICICI, Axis, Kotak</span><span>+ 50 more</span></div><div class="ln"><span>Wallets</span><span>Paytm, Amazon Pay and more</span></div></div>
         <div class="ppanel" data-pp="paypal" hidden><div class="ln"><span>For brands outside India</span><span>USD · EUR · GBP</span></div><div class="ln"><span>Pay with PayPal balance or card</span><span>Converted to INR</span></div></div>
-        <span class="paybtn">Pay ₹999</span>
+        <span class="paybtn">Pay ₹17,999</span>
         <div class="secure"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>Card and UPI details are handled by Razorpay and PayPal, never stored by us</div>
       </div>
     </div>
@@ -790,7 +806,7 @@ main,.scene,.formarea,.lobby{max-width:100%;overflow-x:clip}
     <div class="final">
       <div class="glow"></div>
       <h2 class="reveal">Your next collab is <span class="serif">one form</span> away.</h2>
-      <p>Join free in two minutes. We'll email you when your first match is ready.</p>
+      <p>Join in two minutes. We'll email you when your first match is ready.</p>
       <div class="ctas">
         <a class="btn acc" href="join.html#brand">I'm a brand <span class="ar">→</span></a>
         <a class="btn ghost" href="join.html#creator">I'm a creator <span class="ar">→</span></a>
@@ -1054,7 +1070,7 @@ fitPhone(); addEventListener('resize', fitPhone);
 // payment method tabs
 const pms = $$('.ptabs button');
 pms.forEach(b => b.addEventListener('click', () => { pms.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-  $$('.ppanel').forEach(pn => pn.hidden = pn.dataset.pp !== b.dataset.pm); $('.paybtn').textContent = b.dataset.pm === 'paypal' ? 'Pay with PayPal' : 'Pay ₹999'; }));
+  $$('.ppanel').forEach(pn => pn.hidden = pn.dataset.pp !== b.dataset.pm); $('.paybtn').textContent = b.dataset.pm === 'paypal' ? 'Pay with PayPal' : 'Pay ₹17,999'; }));
 
 // ring counter
 function runRing(){ const fg = $('#ringFg'), tx = $('#ringTx'), o = { v:0 };
